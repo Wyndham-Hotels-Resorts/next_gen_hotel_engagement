@@ -382,7 +382,7 @@ if __name__=='__main__':
                             'Expected Ship Date', 'Waiver Additional Details', 'Waiver Conditional Details', 'Waiver Sub', 
                             'Brand Description Name']]
     
-    merged_df1.to_csv(file_path_outputs + fileName_Waiver + '.csv', index=False, sep=',', header=True,
+    merged_df1.to_csv(file_path_outputs + fileName_Waiver + '.csv', index=False, sep='|', header=True,
                 date_format='%Y-%m-%d')
     
     
