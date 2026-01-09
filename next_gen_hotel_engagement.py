@@ -19,7 +19,7 @@ s3 = AWS_Utils.GetAWSClient()
 s3 = AWS_Utils.GetAWSClient()
 #file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
 file_path_sources = './SourceFiles/'
-file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'
+file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'  #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
 logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
@@ -101,12 +101,12 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f"Distinct count in 'col1': {dist_col_count}")
     
     df_he_item['ID Count'] = df_he_item.groupby(['Brand Standard Number', 'Hotel Engagement ID'])['Id'].transform('count')
-    df_he_item['Status Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Hotel Engagement Status'].transform('count')
-    df_he_item['Cleanliness Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Cleanliness'])['Cleanliness'].transform('count')
-    df_he_item['Compliance Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Compliance'])['Compliance'].transform('count')
-    df_he_item['Condition Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Condition'])['Condition'].transform('count')
-    df_he_item['Failed PIP Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Failed PIP Item'])['Failed PIP Item'].transform('count')
-    
+    df_he_item['Status Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory'])['Hotel Engagement Status'].transform('count')
+    df_he_item['Cleanliness Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Cleanliness'].transform(sum)
+    df_he_item['Compliance Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Compliance'].transform(sum)
+    df_he_item['Condition Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Condition'].transform(sum)
+    df_he_item['Failed PIP Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Failed PIP Item'].transform(sum)
+
     # Rename specific records in the 'Category' column
     df_he_item['GSC Catalog Item Category1'] = df_he_item['GSC Catalog Item Category1'].replace({'Meeting and Business': 'Meeting & Business', 
                                                                                                  'Lobby and Front Desk': 'Lobby & Front Desk',
@@ -119,8 +119,8 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
                               'Cleanliness Count', 'Compliance Count', 'Condition Count',
                               'Failed PIP Item Count']]
     
-    # df_he_item.to_csv(file_path_outputs + 'df_he_item' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
+    df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
+                date_format='%Y-%m-%d')
        
     return df_he_item
 
@@ -261,7 +261,7 @@ if __name__=='__main__':
     client = Birst_Utils.GetBirstClient()
     login = client.service.Login(Birst_Utils.GetBirstUser(), Birst_Utils.GetBirstPassword())
  
-    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'
+    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'
     sf = sf_connector.sf_connect()
     
     print(datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S'))
@@ -386,7 +386,3 @@ if __name__=='__main__':
     
     merged_df1.to_csv(file_path_outputs + fileName_Waiver + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
-    
-    
-
-   
