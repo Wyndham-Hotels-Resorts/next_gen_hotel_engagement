@@ -119,8 +119,8 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
                               'Cleanliness Count', 'Compliance Count', 'Condition Count',
                               'Failed PIP Item Count']]
     
-    df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
-                date_format='%Y-%m-%d')
+    # df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
+    #             date_format='%Y-%m-%d')
        
     return df_he_item
 
