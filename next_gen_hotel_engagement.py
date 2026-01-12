@@ -104,12 +104,18 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f"Distinct count in 'col1': {dist_col_count}")
     
     df_he_item['ID Count'] = df_he_item.groupby(['Brand Standard Number', 'Hotel Engagement ID'])['Id'].transform('count')
-    df_he_item['Status Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory'])['Hotel Engagement Status'].transform('count')
-    df_he_item['Cleanliness Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Cleanliness'].transform(sum)
-    df_he_item['Compliance Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Compliance'].transform(sum)
-    df_he_item['Condition Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Condition'].transform(sum)
-    df_he_item['Failed PIP Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Failed PIP Item'].transform(sum)
-    df_he_item['Safety Time Sensitive Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Safety Time Sensitive Item'].transform(sum)
+    df_he_item['Status Count'] = 1
+    df_he_item['Cleanliness Count'] = df_he_item['Cleanliness'].astype(int)
+    df_he_item['Compliance Count'] = df_he_item['Compliance'].astype(int)
+    df_he_item['Condition Count'] = df_he_item['Condition'].astype(int)
+    df_he_item['Failed PIP Item Count'] = df_he_item['Failed PIP Item'].astype(int)
+    df_he_item['Safety Time Sensitive Item Count'] = df_he_item['Safety Time Sensitive Item'].astype(int)
+
+    # df_he_item['Cleanliness Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Cleanliness'].transform(sum)
+    # df_he_item['Compliance Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Compliance'].transform(sum)
+    # df_he_item['Condition Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Condition'].transform(sum)
+    # df_he_item['Failed PIP Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Failed PIP Item'].transform(sum)
+    # df_he_item['Safety Time Sensitive Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Safety Time Sensitive Item'].transform(sum)
 
     # Rename specific records in the 'Category' column
     df_he_item['GSC Catalog Item Category1'] = df_he_item['GSC Catalog Item Category1'].replace({'Meeting and Business': 'Meeting & Business', 
