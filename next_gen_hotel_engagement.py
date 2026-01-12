@@ -19,7 +19,7 @@ s3 = AWS_Utils.GetAWSClient()
 s3 = AWS_Utils.GetAWSClient()
 #file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
 file_path_sources = './SourceFiles/'
-file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'  #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
+file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'   #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
 logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
@@ -97,6 +97,9 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     print(df_he_item)
     
+    # df_he_item.to_csv(file_path_outputs + 'df_he_item' + '.csv', index=False, sep=',', header=True,
+    #             date_format='%Y-%m-%d')
+    
     dist_col_count = df_he_item['Hotel Engagement ID'].nunique()
     print(f"Distinct count in 'col1': {dist_col_count}")
     
@@ -106,6 +109,7 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
     df_he_item['Compliance Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Compliance'].transform(sum)
     df_he_item['Condition Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Condition'].transform(sum)
     df_he_item['Failed PIP Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Failed PIP Item'].transform(sum)
+    df_he_item['Safety Time Sensitive Item Count'] = df_he_item.groupby(['Hotel Engagement ID', 'GSC Catalog Item Category1', 'Subcategory', 'Hotel Engagement Status'])['Safety Time Sensitive Item'].transform(sum)
 
     # Rename specific records in the 'Category' column
     df_he_item['GSC Catalog Item Category1'] = df_he_item['GSC Catalog Item Category1'].replace({'Meeting and Business': 'Meeting & Business', 
@@ -117,7 +121,7 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
                               'Subcategory', 'Hotel Engagement Status', 'Cleanliness', 
                               'Compliance', 'Condition', 'Failed PIP Item', 'Status Count',
                               'Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count']]
+                              'Failed PIP Item Count','Safety Time Sensitive Item Count']]
     
     # df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
     #             date_format='%Y-%m-%d')
@@ -261,7 +265,7 @@ if __name__=='__main__':
     client = Birst_Utils.GetBirstClient()
     login = client.service.Login(Birst_Utils.GetBirstUser(), Birst_Utils.GetBirstPassword())
  
-    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'
+    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'  #'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'
     sf = sf_connector.sf_connect()
     
     print(datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S'))
@@ -357,7 +361,7 @@ if __name__=='__main__':
                               'Time Period', 'FAC Flag',  'Management Company',  'SF Portfolio', 'RecordTypeDesc',
                               'Hotel Engagement Status', 'Cleanliness', 'Compliance', 'Condition', 'Failed PIP Item', 
                               'Status Count','Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count']]
+                              'Failed PIP Item Count', 'Safety Time Sensitive Item Count']]
     
     merged_df.to_csv(file_path_outputs + fileName_Hotel_Engagement + '.csv', index=False, sep=',', header=True,
                   date_format='%Y-%m-%d')
