@@ -121,7 +121,8 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
                               'Subcategory', 'Hotel Engagement Status', 'Cleanliness', 
                               'Compliance', 'Condition', 'Failed PIP Item', 'Status Count',
                               'Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count','Safety Time Sensitive Item Count']]
+                              'Failed PIP Item Count', 'Safety Time Sensitive Item',
+                              'Safety Time Sensitive Item Count']]
     
     # df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
     #             date_format='%Y-%m-%d')
@@ -361,7 +362,7 @@ if __name__=='__main__':
                               'Time Period', 'FAC Flag',  'Management Company',  'SF Portfolio', 'RecordTypeDesc',
                               'Hotel Engagement Status', 'Cleanliness', 'Compliance', 'Condition', 'Failed PIP Item', 
                               'Status Count','Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count', 'Safety Time Sensitive Item Count']]
+                              'Failed PIP Item Count', 'Safety Time Sensitive Item', 'Safety Time Sensitive Item Count']]
     
     merged_df.to_csv(file_path_outputs + fileName_Hotel_Engagement + '.csv', index=False, sep=',', header=True,
                   date_format='%Y-%m-%d')
