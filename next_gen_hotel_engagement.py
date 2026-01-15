@@ -19,7 +19,7 @@ s3 = AWS_Utils.GetAWSClient()
 s3 = AWS_Utils.GetAWSClient()
 #file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
 file_path_sources = './SourceFiles/'
-file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'   #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
+file_path_outputs = 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
 logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
