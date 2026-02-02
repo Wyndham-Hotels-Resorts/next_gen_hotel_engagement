@@ -275,6 +275,8 @@ if __name__=='__main__':
     sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'  #'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'
     sf = sf_connector.sf_connect()
     
+    startTime = datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S')
+    
     print(datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S'))
     print('Downloading siteAttributes...')
     siteAttributes = Getsitedata(client)
@@ -337,6 +339,8 @@ if __name__=='__main__':
 
     merged_df = siteAttributes.merge(merged_df, how = 'inner', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
     
+    merged_df['Last Updated'] = startTime
+    
     merged_df = merged_df[['site_id', 'ID', 'ID Count', 'Brand Standard Number',
                               'GSC Catalog Item Category1', 'GSC Catalog Item Category2',
                               'Subcategory', 'Name','RecordTypeId', 'Contract', 'Status', 'Type', 'Contract Name',
@@ -368,7 +372,7 @@ if __name__=='__main__':
                               'Time Period', 'FAC Flag',  'Management Company',  'SF Portfolio', 'RecordTypeDesc',
                               'Hotel Engagement Status', 'Cleanliness', 'Compliance', 'Condition', 'Failed PIP Item', 
                               'Status Count','Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count', 'Safety Time Sensitive Item', 'Safety Time Sensitive Item Count']]
+                              'Failed PIP Item Count', 'Safety Time Sensitive Item', 'Safety Time Sensitive Item Count', 'Last Updated']]
     
     merged_df.to_csv(file_path_outputs + fileName_Hotel_Engagement + '.csv', index=False, sep=',', header=True,
                   date_format='%Y-%m-%d')
@@ -384,6 +388,8 @@ if __name__=='__main__':
     merged_df1 = sf_contract.merge(sf_waiver, how='inner', left_on='Contract ID', right_on='Contract')
     merged_df1 = siteAttributes.merge(merged_df1, how = 'left', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
     
+    merged_df1['Last Updated'] = startTime
+    
     merged_df1 = merged_df1[['Id', 'Owner Id', 'Name', 'Created Date', 'Last Modified Date', 'System Modstamp', 'Last Activity Date', 
                             'Account', 'Brand Standards Description', 'Comments to Waiver Requestor', 'Contract Status', 'Contract', 
                             'Date of Request', 'Date of approval', 'Hotel Engagement Item', 'Inspection Category', 'Internal Comments', 
@@ -391,7 +397,7 @@ if __name__=='__main__':
                             'Waiver Rationale', 'Waiver Requested Extension Date', 'Waiver Status', 'Waiver Type', 'Property Brand Standards', 
                             'BSD Category', 'BSD Subcategory', 'Brand Standard Number', 'Expired', 'Waiver Classification', 'Account DFO', 
                             'Expected Ship Date', 'Waiver Additional Details', 'Waiver Conditional Details', 'Waiver Sub', 
-                            'Brand Description Name']]
+                            'Brand Description Name', 'Last Updated']]
     
     merged_df1 = merged_df1.replace({r'\r\n|\r|\n': ' '}, regex=True)
     
