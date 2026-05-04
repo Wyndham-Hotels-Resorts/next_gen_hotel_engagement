@@ -19,10 +19,10 @@ s3 = AWS_Utils.GetAWSClient()
 s3 = AWS_Utils.GetAWSClient()
 #file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
 file_path_sources = './SourceFiles/'
-file_path_outputs = 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
+file_path_outputs = 'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' #'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
-logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
+logFilePath = 'E:/Users/699052/PythonScripts/next_gen_hotel_engagement/' + logFileName #D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/
 
 errorEmailTo = ['businessintelligence@wyndham.com']
 errorEmailSubject = 'Next Gen Hotel Engagement Data Automation - Error'
@@ -128,10 +128,10 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
                               'Compliance', 'Condition', 'Failed PIP Item', 'Status Count',
                               'Cleanliness Count', 'Compliance Count', 'Condition Count',
                               'Failed PIP Item Count', 'Safety Time Sensitive Item',
-                              'Safety Time Sensitive Item Count']]
+                              'Safety Time Sensitive Item Count', 'Time Frame']]
     
-    # df_he_item.to_csv(file_path_outputs + 'df_he_item_new' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
+    df_he_item.to_csv(file_path_outputs + 'df_he_item' + '.csv', index=False, sep=',', header=True,
+                date_format='%Y-%m-%d')
        
     return df_he_item
 
@@ -283,123 +283,123 @@ if __name__=='__main__':
     
     sf_he_item = sf_he_item(sf, sf_queries_dir)
     
-    sf_he_qa = sf_he_qa(sf, sf_queries_dir)
+    # sf_he_qa = sf_he_qa(sf, sf_queries_dir)
     
-    merged_df = sf_he_qa.merge(sf_he_item, how='left', left_on='ID', right_on='Hotel Engagement ID')
+    # merged_df = sf_he_qa.merge(sf_he_item, how='left', left_on='ID', right_on='Hotel Engagement ID')
     
-    # Categories list you want to compare with
-    required_categories = ['Administrative Policies','Food & Beverage',
-                           'Guestroom','Hotel Arrival and Exterior',
-                           'Hotel Facilities','Lobby & Front Desk',
-                           'Meeting & Business']
+    # # Categories list you want to compare with
+    # required_categories = ['Administrative Policies','Food & Beverage',
+    #                        'Guestroom','Hotel Arrival and Exterior',
+    #                        'Hotel Facilities','Lobby & Front Desk',
+    #                        'Meeting & Business']
     
-    # Columns that must become NULL in the new rows
-    null_cols = ['ID Count', 'Brand Standard Number', 'GSC Catalog Item Category2', 
-                 'Subcategory', 'Hotel Engagement Status', 'Cleanliness', 
-                 'Compliance', 'Condition', 'Failed PIP Item', 'Status Count',
-                 'Cleanliness Count', 'Compliance Count', 'Condition Count',
-                 'Failed PIP Item Count']
+    # # Columns that must become NULL in the new rows
+    # null_cols = ['ID Count', 'Brand Standard Number', 'GSC Catalog Item Category2', 
+    #              'Subcategory', 'Hotel Engagement Status', 'Cleanliness', 
+    #              'Compliance', 'Condition', 'Failed PIP Item', 'Status Count',
+    #              'Cleanliness Count', 'Compliance Count', 'Condition Count',
+    #              'Failed PIP Item Count']
             
-    merged_category_col = 'GSC Catalog Item Category1'
+    # merged_category_col = 'GSC Catalog Item Category1'
     
-    new_rows = []
+    # new_rows = []
     
-    # Filter only QA rows first
-    qa_df = merged_df[merged_df['RecordTypeDesc'] == 'QA']
+    # # Filter only QA rows first
+    # qa_df = merged_df[merged_df['RecordTypeDesc'] == 'QA']
     
-    # Group by ID, but only using QA rows
-    for id_value, group in qa_df.groupby('ID'):
+    # # Group by ID, but only using QA rows
+    # for id_value, group in qa_df.groupby('ID'):
     
-        # Categories already present for this ID (only QA rows)
-        existing_categories = group[merged_category_col].dropna().unique()
+    #     # Categories already present for this ID (only QA rows)
+    #     existing_categories = group[merged_category_col].dropna().unique()
     
-        # Find missing categories
-        missing = [cat for cat in required_categories if cat not in existing_categories]
+    #     # Find missing categories
+    #     missing = [cat for cat in required_categories if cat not in existing_categories]
     
-        # Create one new row per missing category
-        for cat in missing:
-            new_row = group.iloc[0].copy()  # take first QA row as template
+    #     # Create one new row per missing category
+    #     for cat in missing:
+    #         new_row = group.iloc[0].copy()  # take first QA row as template
     
-            # Set the category name
-            new_row[merged_category_col] = cat
+    #         # Set the category name
+    #         new_row[merged_category_col] = cat
     
-            # Set selected fields to NULL
-            new_row[null_cols] = np.nan
+    #         # Set selected fields to NULL
+    #         new_row[null_cols] = np.nan
     
-            # Keep RecordType = 'QA'
-            new_row['RecordTypeDesc'] = 'QA'
+    #         # Keep RecordType = 'QA'
+    #         new_row['RecordTypeDesc'] = 'QA'
     
-            new_rows.append(new_row)
+    #         new_rows.append(new_row)
     
-    # Build new rows df
-    new_rows_df = pd.DataFrame(new_rows)
+    # # Build new rows df
+    # new_rows_df = pd.DataFrame(new_rows)
     
-    # Combine with original df
-    merged_df = pd.concat([merged_df, new_rows_df], ignore_index=True)
+    # # Combine with original df
+    # merged_df = pd.concat([merged_df, new_rows_df], ignore_index=True)
 
-    merged_df = siteAttributes.merge(merged_df, how = 'inner', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
+    # merged_df = siteAttributes.merge(merged_df, how = 'inner', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
     
-    merged_df['Last Updated'] = startTime
+    # merged_df['Last Updated'] = startTime
     
-    merged_df = merged_df[['site_id', 'ID', 'ID Count', 'Brand Standard Number',
-                              'GSC Catalog Item Category1', 'GSC Catalog Item Category2',
-                              'Subcategory', 'Name','RecordTypeId', 'Contract', 'Status', 'Type', 'Contract Name',
-                              'QA Last Inspection Date', 'QA Last Inspection Grade',	'QA Last Inspection Score',	
-                              'QA Last Inspection Type',	'Action Plan Status',	'Administrative Policies Score',
-                              'Anticipated Inspection Date',	'Failed Reason',	'Food Beverage Score',
-                              'General Manager','Guestroom Score', 'Hazard Items', 'Hotel Arrival and Exterior Score',
-                              'Hotel Facilities Score',	'Inspection Performed By',	'Lobby Front Desk Score',
-                              'Meeting Business Score',	'Overall Result History',	'Overall Score History',
-                              'PIP Failures',	'Property Commencement Date',	'Property Open Date',
-                              'Reinspection Number',	'Rescored',	'Safety',	'Scheduled Inspection Date',	
-                              'Total Passed Questions Administrative',	'Total Passed Questions Food Beverage',
-                              'Total Passed Questions Guestroom',	'Total Passed Questions Hotel Arrival',
-                              'Total Passed Questions Hotel Facilities',	'Total Passed Questions Lobby Front Desk',
-                              'Total Passed Questions Meeting Business',	'Total Questions Administrative Policies',
-                              'Total Questions Food Beverage',	'Total Questions Guestroom',	'Total Questions Hotel Arrival Exterior',	
-                              'Total Questions Hotel Facilities', 'Total Questions Lobby Front Desk',	'Total Questions Meeting Business',	
-                              'Administrative Policies Results',	'Failed Reason Formula',	'Food Beverage Results',	'Guestroom Results',	
-                              'Hotel Arrival and Exterior Results',	'Hotel Facilities Results',	'Inspector Is Current Running User',
-                              'Lobby Front Desk Results',	'Location',	'Meeting Business Results',	'Overall Grade',	'Overall Score',
-                              'QA Inspection Date',	'Total Passed Questions', 'Total Questions',	'Special Request Type',
-                              'Latest Inspection Indicator',	'Cure Date',	'Special Request',	'Special Request Date',
-                              'Special Request Comments',	'Inspection Start Time',	'Inspection End Time', 'Count of Waivers',
-                              'Cleanliness Blitzes', 'Quality Matters Workshop',	'Quality Matters Workshop 2', 'Remedial Training',
-                              'Remedial Training Charge Date', 'Required For Capital Funding', 'Account', 'PIP Type',
-                              'PIP Inspection Date', 'Chaincode',  'DFO',  'RDFO',  'Same Store',  'SDFO',  
-                              'Country',  'Chain Scale',  'State',  'STR Region', 'Brand Name',  'Revenue Manager',  'Site Name',  
-                              'Highgate Flag', 'Same Store Upscale', 
-                              'Time Period', 'FAC Flag',  'Management Company',  'SF Portfolio', 'RecordTypeDesc',
-                              'Hotel Engagement Status', 'Cleanliness', 'Compliance', 'Condition', 'Failed PIP Item', 
-                              'Status Count','Cleanliness Count', 'Compliance Count', 'Condition Count',
-                              'Failed PIP Item Count', 'Safety Time Sensitive Item', 'Safety Time Sensitive Item Count', 'Last Updated']]
+    # merged_df = merged_df[['site_id', 'ID', 'ID Count', 'Brand Standard Number',
+    #                           'GSC Catalog Item Category1', 'GSC Catalog Item Category2',
+    #                           'Subcategory', 'Name','RecordTypeId', 'Contract', 'Status', 'Type', 'Contract Name',
+    #                           'QA Last Inspection Date', 'QA Last Inspection Grade',	'QA Last Inspection Score',	
+    #                           'QA Last Inspection Type',	'Action Plan Status',	'Administrative Policies Score',
+    #                           'Anticipated Inspection Date',	'Failed Reason',	'Food Beverage Score',
+    #                           'General Manager','Guestroom Score', 'Hazard Items', 'Hotel Arrival and Exterior Score',
+    #                           'Hotel Facilities Score',	'Inspection Performed By',	'Lobby Front Desk Score',
+    #                           'Meeting Business Score',	'Overall Result History',	'Overall Score History',
+    #                           'PIP Failures',	'Property Commencement Date',	'Property Open Date',
+    #                           'Reinspection Number',	'Rescored',	'Safety',	'Scheduled Inspection Date',	
+    #                           'Total Passed Questions Administrative',	'Total Passed Questions Food Beverage',
+    #                           'Total Passed Questions Guestroom',	'Total Passed Questions Hotel Arrival',
+    #                           'Total Passed Questions Hotel Facilities',	'Total Passed Questions Lobby Front Desk',
+    #                           'Total Passed Questions Meeting Business',	'Total Questions Administrative Policies',
+    #                           'Total Questions Food Beverage',	'Total Questions Guestroom',	'Total Questions Hotel Arrival Exterior',	
+    #                           'Total Questions Hotel Facilities', 'Total Questions Lobby Front Desk',	'Total Questions Meeting Business',	
+    #                           'Administrative Policies Results',	'Failed Reason Formula',	'Food Beverage Results',	'Guestroom Results',	
+    #                           'Hotel Arrival and Exterior Results',	'Hotel Facilities Results',	'Inspector Is Current Running User',
+    #                           'Lobby Front Desk Results',	'Location',	'Meeting Business Results',	'Overall Grade',	'Overall Score',
+    #                           'QA Inspection Date',	'Total Passed Questions', 'Total Questions',	'Special Request Type',
+    #                           'Latest Inspection Indicator',	'Cure Date',	'Special Request',	'Special Request Date',
+    #                           'Special Request Comments',	'Inspection Start Time',	'Inspection End Time', 'Count of Waivers',
+    #                           'Cleanliness Blitzes', 'Quality Matters Workshop',	'Quality Matters Workshop 2', 'Remedial Training',
+    #                           'Remedial Training Charge Date', 'Required For Capital Funding', 'Account', 'PIP Type',
+    #                           'PIP Inspection Date', 'Chaincode',  'DFO',  'RDFO',  'Same Store',  'SDFO',  
+    #                           'Country',  'Chain Scale',  'State',  'STR Region', 'Brand Name',  'Revenue Manager',  'Site Name',  
+    #                           'Highgate Flag', 'Same Store Upscale', 
+    #                           'Time Period', 'FAC Flag',  'Management Company',  'SF Portfolio', 'RecordTypeDesc',
+    #                           'Hotel Engagement Status', 'Cleanliness', 'Compliance', 'Condition', 'Failed PIP Item', 
+    #                           'Status Count','Cleanliness Count', 'Compliance Count', 'Condition Count',
+    #                           'Failed PIP Item Count', 'Safety Time Sensitive Item', 'Safety Time Sensitive Item Count', 'Last Updated']]
     
-    merged_df.to_csv(file_path_outputs + fileName_Hotel_Engagement + '.csv', index=False, sep=',', header=True,
-                  date_format='%Y-%m-%d')
+    # merged_df.to_csv(file_path_outputs + fileName_Hotel_Engagement + '.csv', index=False, sep=',', header=True,
+    #               date_format='%Y-%m-%d')
     
-    sf_contract = sf_contract(sf, sf_queries_dir)
+    # sf_contract = sf_contract(sf, sf_queries_dir)
     
-    sf_waiver = sf_waiver(sf, sf_queries_dir)
+    # sf_waiver = sf_waiver(sf, sf_queries_dir)
     
-    sf_brand_std_desc = sf_brand_std_desc(sf, sf_queries_dir)
+    # sf_brand_std_desc = sf_brand_std_desc(sf, sf_queries_dir)
     
-    sf_waiver = sf_waiver.merge(sf_brand_std_desc, how = 'left', left_on='Brand Standards Description', right_on='ID' )
+    # sf_waiver = sf_waiver.merge(sf_brand_std_desc, how = 'left', left_on='Brand Standards Description', right_on='ID' )
     
-    merged_df1 = sf_contract.merge(sf_waiver, how='inner', left_on='Contract ID', right_on='Contract')
-    merged_df1 = siteAttributes.merge(merged_df1, how = 'left', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
+    # merged_df1 = sf_contract.merge(sf_waiver, how='inner', left_on='Contract ID', right_on='Contract')
+    # merged_df1 = siteAttributes.merge(merged_df1, how = 'left', left_on = 'Franchise Agreement Account Number', right_on = 'Contract Name')
     
-    merged_df1['Last Updated'] = startTime
+    # merged_df1['Last Updated'] = startTime
     
-    merged_df1 = merged_df1[['Id', 'Owner Id', 'Name', 'Created Date', 'Last Modified Date', 'System Modstamp', 'Last Activity Date', 
-                            'Account', 'Brand Standards Description', 'Comments to Waiver Requestor', 'Contract Status', 'Contract', 
-                            'Date of Request', 'Date of approval', 'Hotel Engagement Item', 'Inspection Category', 'Internal Comments', 
-                            'Internal Description', 'site_id' , 'Waiver Approver', 'Waiver Description', 'Waiver Expiration Date', 
-                            'Waiver Rationale', 'Waiver Requested Extension Date', 'Waiver Status', 'Waiver Type', 'Property Brand Standards', 
-                            'BSD Category', 'BSD Subcategory', 'Brand Standard Number', 'Expired', 'Waiver Classification', 'Account DFO', 
-                            'Expected Ship Date', 'Waiver Additional Details', 'Waiver Conditional Details', 'Waiver Sub', 
-                            'Brand Description Name', 'Last Updated']]
+    # merged_df1 = merged_df1[['Id', 'Owner Id', 'Name', 'Created Date', 'Last Modified Date', 'System Modstamp', 'Last Activity Date', 
+    #                         'Account', 'Brand Standards Description', 'Comments to Waiver Requestor', 'Contract Status', 'Contract', 
+    #                         'Date of Request', 'Date of approval', 'Hotel Engagement Item', 'Inspection Category', 'Internal Comments', 
+    #                         'Internal Description', 'site_id' , 'Waiver Approver', 'Waiver Description', 'Waiver Expiration Date', 
+    #                         'Waiver Rationale', 'Waiver Requested Extension Date', 'Waiver Status', 'Waiver Type', 'Property Brand Standards', 
+    #                         'BSD Category', 'BSD Subcategory', 'Brand Standard Number', 'Expired', 'Waiver Classification', 'Account DFO', 
+    #                         'Expected Ship Date', 'Waiver Additional Details', 'Waiver Conditional Details', 'Waiver Sub', 
+    #                         'Brand Description Name', 'Last Updated']]
     
-    merged_df1 = merged_df1.replace({r'\r\n|\r|\n': ' '}, regex=True)
+    # merged_df1 = merged_df1.replace({r'\r\n|\r|\n': ' '}, regex=True)
     
-    merged_df1.to_csv(file_path_outputs + fileName_Waiver + '.csv', index=False, sep=',', header=True,
-                date_format='%Y-%m-%d')
+    # merged_df1.to_csv(file_path_outputs + fileName_Waiver + '.csv', index=False, sep=',', header=True,
+    #             date_format='%Y-%m-%d')
