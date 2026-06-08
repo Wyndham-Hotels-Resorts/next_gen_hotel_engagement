@@ -25,9 +25,9 @@ file_path_outputs = 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
 logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName #D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/
 
-errorEmailTo = ['businessintelligence@wyndham.com']
+errorEmailTo = ['anshul.maathur1@wyndham.com','eric.kwok@wyndham.com', 'daniel.dai@wyndham.com','brian.mohr@wyndham.com','businessintelligence@wyndham.com']
 errorEmailSubject = 'Next Gen Hotel Engagement Data Automation - Error'
-successEmailTo = ['businessintelligence@wyndham.com']
+successEmailTo = ['anshul.maathur1@wyndham.com','eric.kwok@wyndham.com', 'daniel.dai@wyndham.com','brian.mohr@wyndham.com','businessintelligence@wyndham.com']
 successEmailSubject = 'Next Gen Hotel Engagement Data Automation - Success'
 
 fileName_Hotel_Engagement = 'Hotel Engagement'
