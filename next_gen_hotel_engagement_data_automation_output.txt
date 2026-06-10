@@ -1,46 +1,28 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-2026-06-08 12:57:34
+2026-06-10 05:00:06
 Downloading siteAttributes...
  SELECT USING OUTER JOIN [Site_Mapping.CHAIN_CODE_CURR] 'COL1' , [Site_Mapping.DFO] 'COL2' ,[Site_Mapping.RDFO] 'COL3' ,                 [Site_Mapping.SAME_STORE_CURR] 'COL4' , [Site_Mapping.SDFO] 'COL5' , [Site_Mapping.site_id] 'COL6',                 [Site_Mapping.country_name] 'COL7' , [Site_Mapping.Chain Scale Curr] 'COL8',[Site_Mapping.STR_STATE_CD] 'COL9',                 [Site_Mapping.STR Region] 'COL10' , [Site_Mapping.brand_nm_cur] 'COL11',[Site_Mapping.CDRM/RM] 'COL12',                 [Site_Mapping.Site Name Curr Fix] 'COL13', [Site_Mapping.Highgate_Flag] 'COL14',[Site_Mapping.fran_agr_acct_num] 'COL15',                 [Site_Mapping.same_store_upscale] 'COL16', [Site_Mapping.Time Period] 'COL17',[Site_Mapping.FAC Member Flag]'COL18',                 [Site_Mapping.mgmnt_cmpny]'COL19',[Site_Mapping.sf_portfolio]'COL20'                 FROM [ALL] WHERE ( ( [Site_Mapping.cur_site_flg]='Y' ))
  Calling executeQueryInSpaceWithOptions()
- queryToken E4DBE9E5AB8D4D43B56F37F12562F925
-Not done yet... 2026-06-08 12:57:51.422258
-=======
-2026-05-04 13:20:56
-Downloading siteAttributes...
- SELECT USING OUTER JOIN [Site_Mapping.CHAIN_CODE_CURR] 'COL1' , [Site_Mapping.DFO] 'COL2' ,[Site_Mapping.RDFO] 'COL3' ,                 [Site_Mapping.SAME_STORE_CURR] 'COL4' , [Site_Mapping.SDFO] 'COL5' , [Site_Mapping.site_id] 'COL6',                 [Site_Mapping.country_name] 'COL7' , [Site_Mapping.Chain Scale Curr] 'COL8',[Site_Mapping.STR_STATE_CD] 'COL9',                 [Site_Mapping.STR Region] 'COL10' , [Site_Mapping.brand_nm_cur] 'COL11',[Site_Mapping.CDRM/RM] 'COL12',                 [Site_Mapping.Site Name Curr Fix] 'COL13', [Site_Mapping.Highgate_Flag] 'COL14',[Site_Mapping.fran_agr_acct_num] 'COL15',                 [Site_Mapping.same_store_upscale] 'COL16', [Site_Mapping.Time Period] 'COL17',[Site_Mapping.FAC Member Flag]'COL18',                 [Site_Mapping.mgmnt_cmpny]'COL19',[Site_Mapping.sf_portfolio]'COL20'                 FROM [ALL] WHERE ( ( [Site_Mapping.cur_site_flg]='Y' ))
- Calling executeQueryInSpaceWithOptions()
- queryToken 5471415E10E05943A3D9C2F601D22CBA
-Not done yet... 2026-05-04 13:21:08.020609
->>>>>>> Stashed changes
-=======
-2026-06-08 05:00:06
-Downloading siteAttributes...
- SELECT USING OUTER JOIN [Site_Mapping.CHAIN_CODE_CURR] 'COL1' , [Site_Mapping.DFO] 'COL2' ,[Site_Mapping.RDFO] 'COL3' ,                 [Site_Mapping.SAME_STORE_CURR] 'COL4' , [Site_Mapping.SDFO] 'COL5' , [Site_Mapping.site_id] 'COL6',                 [Site_Mapping.country_name] 'COL7' , [Site_Mapping.Chain Scale Curr] 'COL8',[Site_Mapping.STR_STATE_CD] 'COL9',                 [Site_Mapping.STR Region] 'COL10' , [Site_Mapping.brand_nm_cur] 'COL11',[Site_Mapping.CDRM/RM] 'COL12',                 [Site_Mapping.Site Name Curr Fix] 'COL13', [Site_Mapping.Highgate_Flag] 'COL14',[Site_Mapping.fran_agr_acct_num] 'COL15',                 [Site_Mapping.same_store_upscale] 'COL16', [Site_Mapping.Time Period] 'COL17',[Site_Mapping.FAC Member Flag]'COL18',                 [Site_Mapping.mgmnt_cmpny]'COL19',[Site_Mapping.sf_portfolio]'COL20'                 FROM [ALL] WHERE ( ( [Site_Mapping.cur_site_flg]='Y' ))
- Calling executeQueryInSpaceWithOptions()
- queryToken 99D260FB37CC0946A29B03CF7F928D8B
-Not done yet... 2026-06-08 05:00:17.381100
->>>>>>> main
+ queryToken F204C53050AE9245BD89E8C7E5049270
+Not done yet... 2026-06-10 05:00:18.175738
  Cols: ['CHAIN_CODE_CURR', 'DFO', 'RDFO', 'SAME_STORE_CURR', 'SDFO', 'site_id', 'country_name', 'Chain Scale Curr', 'STR_STATE_CD', 'STR Region', 'brand_nm_cur', 'CDRM/RM', 'Site Name Curr Fix', 'Highgate_Flag', 'fran_agr_acct_num', 'same_store_upscale', 'Time Period', 'FAC Member Flag', 'mgmnt_cmpny', 'sf_portfolio']
  Rows: ['RFD', 'None', 'None', 'Term Store', 'None', '56235', 'MEXICO', 'Luxury', None, None, 'REGISTRY COLLECTION', 'None', 'Grand Residences Riviera Cancun, a Registry Collection Hotel', 'N', '56235-19256-01-RFD', 'N', None, 'N', None, None]
  Extracted row count:  25000
- Extracted row count:  26379
+ Extracted row count:  26387
 data DF:
-     Chaincode             DFO  ... Management Company SF Portfolio
-0          RFD            none  ...               None         None
-1          RAI            none  ...               None         None
-2          WDF            none  ...               None         None
-3          WDF            none  ...               None         None
-4          WTW  sávio bromberg  ...               None         None
-...        ...             ...  ...                ...          ...
-1374       LFD            none  ...               None         None
-1375       HTN            none  ...               None         None
-1376       DFY            none  ...               None         None
-1377       SUP            none  ...               None         None
-1378       WIY            none  ...               None         None
+     Chaincode                         DFO  ... Management Company SF Portfolio
+0          RFD                        none  ...               None         None
+1          RAI                        none  ...               None         None
+2          WDF                        none  ...               None         None
+3          WDF  arturo luna xochipiltecatl  ...               None         None
+4          WTW              sávio bromberg  ...               None         None
+...        ...                         ...  ...                ...          ...
+1382       RFY                  jason chen  ...               None         None
+1383       DAY                   teha cade  ...               None         None
+1384       DAY                        none  ...               None         None
+1385       MTL                        none  ...               None         None
+1386       HOJ                        none  ...               None         None
 
-[26379 rows x 20 columns]
+[26387 rows x 20 columns]
 SELECT id,
        isdeleted,
        NAME,
@@ -87,92 +69,60 @@ SELECT id,
        subcategory__c
 FROM   hotel_engagement_item__c 
 where isdeleted = False 
-<<<<<<< Updated upstream
 df_he_item info:
 <class 'pandas.core.frame.DataFrame'>
-<<<<<<< HEAD
-RangeIndex: 566816 entries, 0 to 566815
+RangeIndex: 567818 entries, 0 to 567817
 Data columns (total 44 columns):
  #   Column                          Non-Null Count   Dtype  
 ---  ------                          --------------   -----  
- 0   Id                              566816 non-null  object 
- 1   IsDeleted                       566816 non-null  bool   
- 2   Name                            566816 non-null  object 
- 3   RecordTypeId                    566816 non-null  object 
- 4   CreatedDate                     566816 non-null  object 
- 5   LastModifiedDate                566816 non-null  object 
- 6   SystemModstamp                  566816 non-null  object 
-=======
-RangeIndex: 566784 entries, 0 to 566783
-Data columns (total 44 columns):
- #   Column                          Non-Null Count   Dtype  
----  ------                          --------------   -----  
- 0   Id                              566784 non-null  object 
- 1   IsDeleted                       566784 non-null  bool   
- 2   Name                            566784 non-null  object 
- 3   RecordTypeId                    566784 non-null  object 
- 4   CreatedDate                     566784 non-null  object 
- 5   LastModifiedDate                566784 non-null  object 
- 6   SystemModstamp                  566784 non-null  object 
->>>>>>> main
+ 0   Id                              567818 non-null  object 
+ 1   IsDeleted                       567818 non-null  bool   
+ 2   Name                            567818 non-null  object 
+ 3   RecordTypeId                    567818 non-null  object 
+ 4   CreatedDate                     567818 non-null  object 
+ 5   LastModifiedDate                567818 non-null  object 
+ 6   SystemModstamp                  567818 non-null  object 
  7   LastActivityDate                4 non-null       object 
  8   LastViewedDate                  0 non-null       object 
  9   LastReferencedDate              0 non-null       object 
  10  ConnectionReceivedId            0 non-null       object 
  11  ConnectionSentId                0 non-null       object 
-<<<<<<< HEAD
- 12  Hotel Engagement ID             566816 non-null  object 
- 13  Assignee                        518289 non-null  object 
+ 12  Hotel Engagement ID             567818 non-null  object 
+ 13  Assignee                        519292 non-null  object 
  14  Description                     0 non-null       object 
- 15  Due Date                        332310 non-null  object 
- 16  GSC Catalog Item Category1      566767 non-null  object 
-=======
- 12  Hotel Engagement ID             566784 non-null  object 
- 13  Assignee                        518257 non-null  object 
- 14  Description                     0 non-null       object 
- 15  Due Date                        332278 non-null  object 
- 16  GSC Catalog Item Category1      566735 non-null  object 
->>>>>>> main
- 17  GSC Catalog Item Category2      173790 non-null  object 
+ 15  Due Date                        333184 non-null  object 
+ 16  GSC Catalog Item Category1      567769 non-null  object 
+ 17  GSC Catalog Item Category2      173842 non-null  object 
  18  GSC Catalog Item Created Date   52 non-null      object 
  19  GSC Catalog Item Disabled Date  1 non-null       object 
- 20  GSC Catalog Item ID             81417 non-null   object 
-<<<<<<< HEAD
- 21  GSC Catalog Item Name           566718 non-null  object 
+ 20  GSC Catalog Item ID             81460 non-null   object 
+ 21  GSC Catalog Item Name           567720 non-null  object 
  22  GSC Catalog Item Updated Date   52 non-null      object 
- 23  GSC Custom ID                   130900 non-null  object 
- 24  GSC PIP Active                  566816 non-null  bool   
- 25  Hotel Engagement Status         566816 non-null  object 
-=======
- 21  GSC Catalog Item Name           566686 non-null  object 
- 22  GSC Catalog Item Updated Date   52 non-null      object 
- 23  GSC Custom ID                   130900 non-null  object 
- 24  GSC PIP Active                  566784 non-null  bool   
- 25  Hotel Engagement Status         566784 non-null  object 
->>>>>>> main
+ 23  GSC Custom ID                   130943 non-null  object 
+ 24  GSC PIP Active                  567818 non-null  bool   
+ 25  Hotel Engagement Status         567818 non-null  object 
  26  Title                           0 non-null       object 
  27  Completed Date                  0 non-null       object 
  28  ContractId GSC Catalog Item ID  52 non-null      object 
- 29  GSC Catalog Item Category3      173787 non-null  object 
-<<<<<<< HEAD
- 30  GSC Item                        382834 non-null  object 
+ 29  GSC Catalog Item Category3      173839 non-null  object 
+ 30  GSC Item                        383494 non-null  object 
  31  Legacy Id                       2087 non-null    object 
- 32  Time Frame                      526661 non-null  object 
- 33  Internal Files                  564249 non-null  float64
- 34  Brand Standards Description     566744 non-null  object 
- 35  Calculated Due Date             349759 non-null  object 
- 36  Cleanliness                     566816 non-null  bool   
- 37  Compliance                      566816 non-null  bool   
- 38  Condition                       566816 non-null  bool   
- 39  Contract                        392948 non-null  object 
- 40  Failed PIP Item                 566816 non-null  bool   
- 41  Safety Time Sensitive Item      566816 non-null  bool   
- 42  Brand Standard Number           566744 non-null  object 
- 43  Subcategory                     566744 non-null  object 
+ 32  Time Frame                      527587 non-null  object 
+ 33  Internal Files                  565251 non-null  float64
+ 34  Brand Standards Description     567746 non-null  object 
+ 35  Calculated Due Date             350633 non-null  object 
+ 36  Cleanliness                     567818 non-null  bool   
+ 37  Compliance                      567818 non-null  bool   
+ 38  Condition                       567818 non-null  bool   
+ 39  Contract                        393898 non-null  object 
+ 40  Failed PIP Item                 567818 non-null  bool   
+ 41  Safety Time Sensitive Item      567818 non-null  bool   
+ 42  Brand Standard Number           567746 non-null  object 
+ 43  Subcategory                     567746 non-null  object 
 dtypes: bool(7), float64(1), object(36)
-memory usage: 163.8+ MB
+memory usage: 164.1+ MB
 None
-df_he_item shape: (566816, 44)
+df_he_item shape: (567818, 44)
                         Id  ...                       Subcategory
 0       a5R4u000001ntg7EAA  ...   Property Systems and Technology
 1       a5R4u000001ntg8EAA  ...                         Breakfast
@@ -180,49 +130,14 @@ df_he_item shape: (566816, 44)
 3       a5R4u000001ntgAEAQ  ...                    Guest Bathroom
 4       a5R4u000001ntgBEAQ  ...                    Guest Bathroom
 ...                    ...  ...                               ...
-566811  a5RVb000002WZkfMAG  ...  Guestroom Design and Furnishings
-566812  a5RVb000002WZkgMAG  ...  Guestroom Design and Furnishings
-566813  a5RVb000002WZkhMAG  ...                    Guest Bathroom
-566814  a5RVb000002WZkiMAG  ...  Guestroom Design and Furnishings
-566815  a5RVb000002WZkjMAG  ...                    Guest Bathroom
+567813  a5RVb000002WvSCMA0  ...  Guestroom Design and Furnishings
+567814  a5RVb000002WvSDMA0  ...                    Guest Bathroom
+567815  a5RVb000002WvSEMA0  ...            Supplies and Equipment
+567816  a5RVb000002WvSFMA0  ...                     Guestroom Bed
+567817  a5RVb000002WvSGMA0  ...            Supplies and Equipment
 
-[566816 rows x 44 columns]
-Distinct count in 'col1': 22920
-=======
- 30  GSC Item                        382815 non-null  object 
- 31  Legacy Id                       2087 non-null    object 
- 32  Time Frame                      526629 non-null  object 
- 33  Internal Files                  564217 non-null  float64
- 34  Brand Standards Description     566712 non-null  object 
- 35  Calculated Due Date             349727 non-null  object 
- 36  Cleanliness                     566784 non-null  bool   
- 37  Compliance                      566784 non-null  bool   
- 38  Condition                       566784 non-null  bool   
- 39  Contract                        392916 non-null  object 
- 40  Failed PIP Item                 566784 non-null  bool   
- 41  Safety Time Sensitive Item      566784 non-null  bool   
- 42  Brand Standard Number           566712 non-null  object 
- 43  Subcategory                     566712 non-null  object 
-dtypes: bool(7), float64(1), object(36)
-memory usage: 163.8+ MB
-None
-df_he_item shape: (566784, 44)
-                        Id  ...                      Subcategory
-0       a5R4u000001ntg7EAA  ...  Property Systems and Technology
-1       a5R4u000001ntg8EAA  ...                        Breakfast
-2       a5R4u000001ntg9EAA  ...                   Guest Bathroom
-3       a5R4u000001ntgAEAQ  ...                   Guest Bathroom
-4       a5R4u000001ntgBEAQ  ...                   Guest Bathroom
-...                    ...  ...                              ...
-566779  a5RVb000002WHnmMAG  ...      Lobby and Front Desk Design
-566780  a5RVb000002WHnnMAG  ...     Guest Amenities and Services
-566781  a5RVb000002WHpNMAW  ...          Grounds and Landscaping
-566782  a5RVb000002WHpOMAW  ...                Property Exterior
-566783  a5RVb000002WHpPMAW  ...          Grounds and Landscaping
-
-[566784 rows x 44 columns]
-Distinct count in 'col1': 22918
->>>>>>> main
+[567818 rows x 44 columns]
+Distinct count in 'col1': 22961
 SELECT 
 Id,
 Name,
@@ -308,191 +223,98 @@ FROM Hotel_Engagement__c
 WHERE (RecordTypeId='0124u000000YX32AAG' or RecordTypeId='0124u000000YX3dAAG' or RecordTypeId='0124u000000YX31AAG')
 and IsDeleted = False
 ['54857-15924-01-BAY' '52119-10939-01-WIN' '54655-15116-01-WDF' ...
-<<<<<<< HEAD
- '61299-01056-01-HOJ' '58884-28410-03-WFY' '51899-27528-02-AFD']
+ '46391-28367-02-RFY' '61420-01056-01-HOJ' '61242-28185-01-BAY']
 df_he_qa info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 70901 entries, 0 to 70900
+RangeIndex: 70950 entries, 0 to 70949
 Data columns (total 81 columns):
  #   Column                                   Non-Null Count  Dtype  
 ---  ------                                   --------------  -----  
- 0   ID                                       70901 non-null  object 
- 1   Name                                     70901 non-null  object 
- 2   RecordTypeId                             70901 non-null  object 
- 3   Contract                                 70901 non-null  object 
- 4   Status                                   70890 non-null  object 
- 5   Type                                     70820 non-null  object 
- 6   Contract Name                            70901 non-null  object 
-=======
- '52901-28342-03-LFD' '40351-28405-03-BAY' '46488-28201-02-WIN']
-df_he_qa info:
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 70894 entries, 0 to 70893
-Data columns (total 81 columns):
- #   Column                                   Non-Null Count  Dtype  
----  ------                                   --------------  -----  
- 0   ID                                       70894 non-null  object 
- 1   Name                                     70894 non-null  object 
- 2   RecordTypeId                             70894 non-null  object 
- 3   Contract                                 70894 non-null  object 
- 4   Status                                   70883 non-null  object 
- 5   Type                                     70813 non-null  object 
- 6   Contract Name                            70894 non-null  object 
->>>>>>> main
+ 0   ID                                       70950 non-null  object 
+ 1   Name                                     70950 non-null  object 
+ 2   RecordTypeId                             70950 non-null  object 
+ 3   Contract                                 70950 non-null  object 
+ 4   Status                                   70939 non-null  object 
+ 5   Type                                     70869 non-null  object 
+ 6   Contract Name                            70950 non-null  object 
  7   QA Last Inspection Date                  7009 non-null   object 
  8   QA Last Inspection Grade                 34726 non-null  object 
  9   QA Last Inspection Score                 31399 non-null  float64
  10  QA Last Inspection Type                  7009 non-null   object 
-<<<<<<< HEAD
- 11  Action Plan Status                       15183 non-null  object 
- 12  Administrative Policies Score            13011 non-null  float64
- 13  Anticipated Inspection Date              28222 non-null  object 
- 14  Failed Reason                            7873 non-null   object 
- 15  Food Beverage Score                      12983 non-null  float64
- 16  General Manager                          13995 non-null  object 
- 17  Guestroom Score                          12980 non-null  float64
- 18  Hazard Items                             12663 non-null  object 
- 19  Hotel Arrival and Exterior Score         12990 non-null  float64
- 20  Hotel Facilities Score                   12976 non-null  float64
- 21  Inspection Performed By                  45339 non-null  object 
- 22  Lobby Front Desk Score                   13011 non-null  float64
- 23  Meeting Business Score                   12970 non-null  float64
- 24  Overall Result History                   13295 non-null  object 
- 25  Overall Score History                    12600 non-null  float64
- 26  PIP Failures                             12588 non-null  float64
- 27  Property Commencement Date               70202 non-null  object 
- 28  Property Open Date                       70215 non-null  object 
- 29  Reinspection Number                      9120 non-null   float64
- 30  Rescored                                 70901 non-null  bool   
- 31  Safety                                   70901 non-null  bool   
- 32  Scheduled Inspection Date                13919 non-null  object 
- 33  Total Passed Questions Administrative    12831 non-null  float64
- 34  Total Passed Questions Food Beverage     12756 non-null  float64
- 35  Total Passed Questions Guestroom         12744 non-null  float64
- 36  Total Passed Questions Hotel Arrival     12764 non-null  float64
- 37  Total Passed Questions Hotel Facilities  12746 non-null  float64
- 38  Total Passed Questions Lobby Front Desk  12832 non-null  float64
- 39  Total Passed Questions Meeting Business  12741 non-null  float64
- 40  Total Questions Administrative Policies  12832 non-null  float64
- 41  Total Questions Food Beverage            12756 non-null  float64
- 42  Total Questions Guestroom                12740 non-null  float64
- 43  Total Questions Hotel Arrival Exterior   12763 non-null  float64
- 44  Total Questions Hotel Facilities         12746 non-null  float64
- 45  Total Questions Lobby Front Desk         12831 non-null  float64
- 46  Total Questions Meeting Business         12740 non-null  float64
- 47  Administrative Policies Results          13011 non-null  object 
- 48  Failed Reason Formula                    7873 non-null   object 
- 49  Food Beverage Results                    12983 non-null  object 
- 50  Guestroom Results                        12980 non-null  object 
- 51  Hotel Arrival and Exterior Results       12990 non-null  object 
- 52  Hotel Facilities Results                 12976 non-null  object 
- 53  Inspector Is Current Running User        70901 non-null  bool   
- 54  Lobby Front Desk Results                 13011 non-null  object 
- 55  Location                                 25688 non-null  object 
- 56  Meeting Business Results                 12975 non-null  object 
- 57  Overall Grade                            48552 non-null  object 
- 58  Overall Score                            47761 non-null  float64
- 59  QA Inspection Date                       45188 non-null  object 
- 60  Total Passed Questions                   70901 non-null  float64
- 61  Total Questions                          70901 non-null  float64
+ 11  Action Plan Status                       15225 non-null  object 
+ 12  Administrative Policies Score            13048 non-null  float64
+ 13  Anticipated Inspection Date              28269 non-null  object 
+ 14  Failed Reason                            7891 non-null   object 
+ 15  Food Beverage Score                      13019 non-null  float64
+ 16  General Manager                          14017 non-null  object 
+ 17  Guestroom Score                          13020 non-null  float64
+ 18  Hazard Items                             12702 non-null  object 
+ 19  Hotel Arrival and Exterior Score         13026 non-null  float64
+ 20  Hotel Facilities Score                   13013 non-null  float64
+ 21  Inspection Performed By                  45385 non-null  object 
+ 22  Lobby Front Desk Score                   13048 non-null  float64
+ 23  Meeting Business Score                   13007 non-null  float64
+ 24  Overall Result History                   13342 non-null  object 
+ 25  Overall Score History                    12640 non-null  float64
+ 26  PIP Failures                             12628 non-null  float64
+ 27  Property Commencement Date               70251 non-null  object 
+ 28  Property Open Date                       70264 non-null  object 
+ 29  Reinspection Number                      9141 non-null   float64
+ 30  Rescored                                 70950 non-null  bool   
+ 31  Safety                                   70950 non-null  bool   
+ 32  Scheduled Inspection Date                13967 non-null  object 
+ 33  Total Passed Questions Administrative    12868 non-null  float64
+ 34  Total Passed Questions Food Beverage     12792 non-null  float64
+ 35  Total Passed Questions Guestroom         12784 non-null  float64
+ 36  Total Passed Questions Hotel Arrival     12800 non-null  float64
+ 37  Total Passed Questions Hotel Facilities  12783 non-null  float64
+ 38  Total Passed Questions Lobby Front Desk  12869 non-null  float64
+ 39  Total Passed Questions Meeting Business  12778 non-null  float64
+ 40  Total Questions Administrative Policies  12869 non-null  float64
+ 41  Total Questions Food Beverage            12792 non-null  float64
+ 42  Total Questions Guestroom                12780 non-null  float64
+ 43  Total Questions Hotel Arrival Exterior   12799 non-null  float64
+ 44  Total Questions Hotel Facilities         12783 non-null  float64
+ 45  Total Questions Lobby Front Desk         12868 non-null  float64
+ 46  Total Questions Meeting Business         12777 non-null  float64
+ 47  Administrative Policies Results          13048 non-null  object 
+ 48  Failed Reason Formula                    7891 non-null   object 
+ 49  Food Beverage Results                    13019 non-null  object 
+ 50  Guestroom Results                        13020 non-null  object 
+ 51  Hotel Arrival and Exterior Results       13026 non-null  object 
+ 52  Hotel Facilities Results                 13013 non-null  object 
+ 53  Inspector Is Current Running User        70950 non-null  bool   
+ 54  Lobby Front Desk Results                 13048 non-null  object 
+ 55  Location                                 25732 non-null  object 
+ 56  Meeting Business Results                 13012 non-null  object 
+ 57  Overall Grade                            48595 non-null  object 
+ 58  Overall Score                            47797 non-null  float64
+ 59  QA Inspection Date                       45231 non-null  object 
+ 60  Total Passed Questions                   70950 non-null  float64
+ 61  Total Questions                          70950 non-null  float64
  62  Special Request Type                     516 non-null    object 
- 63  Latest Inspection Indicator              44964 non-null  object 
- 64  Cure Date                                27999 non-null  object 
- 65  Special Request                          70901 non-null  bool   
+ 63  Latest Inspection Indicator              45002 non-null  object 
+ 64  Cure Date                                28036 non-null  object 
+ 65  Special Request                          70950 non-null  bool   
  66  Special Request Date                     806 non-null    object 
- 67  Special Request Comments                 2271 non-null   object 
- 68  Inspection Start Time                    45188 non-null  object 
- 69  Inspection End Time                      45171 non-null  object 
-=======
- 11  Action Plan Status                       15181 non-null  object 
- 12  Administrative Policies Score            13003 non-null  float64
- 13  Anticipated Inspection Date              28215 non-null  object 
- 14  Failed Reason                            7870 non-null   object 
- 15  Food Beverage Score                      12975 non-null  float64
- 16  General Manager                          13990 non-null  object 
- 17  Guestroom Score                          12975 non-null  float64
- 18  Hazard Items                             12659 non-null  object 
- 19  Hotel Arrival and Exterior Score         12982 non-null  float64
- 20  Hotel Facilities Score                   12969 non-null  float64
- 21  Inspection Performed By                  45330 non-null  object 
- 22  Lobby Front Desk Score                   13003 non-null  float64
- 23  Meeting Business Score                   12963 non-null  float64
- 24  Overall Result History                   13292 non-null  object 
- 25  Overall Score History                    12597 non-null  float64
- 26  PIP Failures                             12586 non-null  float64
- 27  Property Commencement Date               70195 non-null  object 
- 28  Property Open Date                       70208 non-null  object 
- 29  Reinspection Number                      9119 non-null   float64
- 30  Rescored                                 70894 non-null  bool   
- 31  Safety                                   70894 non-null  bool   
- 32  Scheduled Inspection Date                13910 non-null  object 
- 33  Total Passed Questions Administrative    12823 non-null  float64
- 34  Total Passed Questions Food Beverage     12748 non-null  float64
- 35  Total Passed Questions Guestroom         12739 non-null  float64
- 36  Total Passed Questions Hotel Arrival     12756 non-null  float64
- 37  Total Passed Questions Hotel Facilities  12739 non-null  float64
- 38  Total Passed Questions Lobby Front Desk  12824 non-null  float64
- 39  Total Passed Questions Meeting Business  12734 non-null  float64
- 40  Total Questions Administrative Policies  12824 non-null  float64
- 41  Total Questions Food Beverage            12748 non-null  float64
- 42  Total Questions Guestroom                12735 non-null  float64
- 43  Total Questions Hotel Arrival Exterior   12755 non-null  float64
- 44  Total Questions Hotel Facilities         12739 non-null  float64
- 45  Total Questions Lobby Front Desk         12823 non-null  float64
- 46  Total Questions Meeting Business         12733 non-null  float64
- 47  Administrative Policies Results          13003 non-null  object 
- 48  Failed Reason Formula                    7870 non-null   object 
- 49  Food Beverage Results                    12975 non-null  object 
- 50  Guestroom Results                        12975 non-null  object 
- 51  Hotel Arrival and Exterior Results       12982 non-null  object 
- 52  Hotel Facilities Results                 12969 non-null  object 
- 53  Inspector Is Current Running User        70894 non-null  bool   
- 54  Lobby Front Desk Results                 13003 non-null  object 
- 55  Location                                 25681 non-null  object 
- 56  Meeting Business Results                 12968 non-null  object 
- 57  Overall Grade                            48544 non-null  object 
- 58  Overall Score                            47753 non-null  float64
- 59  QA Inspection Date                       45180 non-null  object 
- 60  Total Passed Questions                   70894 non-null  float64
- 61  Total Questions                          70894 non-null  float64
- 62  Special Request Type                     516 non-null    object 
- 63  Latest Inspection Indicator              44956 non-null  object 
- 64  Cure Date                                27992 non-null  object 
- 65  Special Request                          70894 non-null  bool   
- 66  Special Request Date                     806 non-null    object 
- 67  Special Request Comments                 2269 non-null   object 
- 68  Inspection Start Time                    45180 non-null  object 
- 69  Inspection End Time                      45169 non-null  object 
->>>>>>> main
+ 67  Special Request Comments                 2273 non-null   object 
+ 68  Inspection Start Time                    45231 non-null  object 
+ 69  Inspection End Time                      45219 non-null  object 
  70  Count of Waivers                         747 non-null    float64
  71  Cleanliness Blitzes                      458 non-null    object 
  72  Quality Matters Workshop                 609 non-null    object 
  73  Quality Matters Workshop 2               252 non-null    object 
-<<<<<<< HEAD
- 74  Remedial Training                        70901 non-null  bool   
+ 74  Remedial Training                        70950 non-null  bool   
  75  Remedial Training Charge Date            381 non-null    object 
- 76  Required For Capital Funding             70901 non-null  bool   
- 77  Account                                  25688 non-null  object 
- 78  PIP Type                                 8007 non-null   object 
- 79  PIP Inspection Date                      1948 non-null   object 
- 80  RecordTypeDesc                           70901 non-null  object 
+ 76  Required For Capital Funding             70950 non-null  bool   
+ 77  Account                                  25732 non-null  object 
+ 78  PIP Type                                 8008 non-null   object 
+ 79  PIP Inspection Date                      1949 non-null   object 
+ 80  RecordTypeDesc                           70950 non-null  object 
 dtypes: bool(6), float64(29), object(46)
 memory usage: 41.0+ MB
 None
-df_he_qa shape: (70901, 81)
-=======
- 74  Remedial Training                        70894 non-null  bool   
- 75  Remedial Training Charge Date            381 non-null    object 
- 76  Required For Capital Funding             70894 non-null  bool   
- 77  Account                                  25681 non-null  object 
- 78  PIP Type                                 8007 non-null   object 
- 79  PIP Inspection Date                      1948 non-null   object 
- 80  RecordTypeDesc                           70894 non-null  object 
-dtypes: bool(6), float64(29), object(46)
-memory usage: 41.0+ MB
-None
-df_he_qa shape: (70894, 81)
->>>>>>> main
+df_he_qa shape: (70950, 81)
                        ID        Name  ... PIP Inspection Date RecordTypeDesc
 0      a5S4u000002tBAEEA2   HE- 00080  ...                None            PIP
 1      a5S4u000002tBAYEA2   HE- 00084  ...                None            PIP
@@ -500,110 +322,73 @@ df_he_qa shape: (70894, 81)
 3      a5S4u000002tBAjEAM   HE- 00087  ...                None            PIP
 4      a5S4u000002tBAnEAM   HE- 00088  ...                None            PIP
 ...                   ...         ...  ...                 ...            ...
-<<<<<<< HEAD
-70896  a5SVb000001v9CUMAY  HE- 633536  ...                None             QA
-70897  a5SVb000001v9CVMAY  HE- 633537  ...                None             QA
-70898  a5SVb000001v9UDMAY  HE- 633548  ...                None             QA
-70899  a5SVb000001v9XRMAY  HE- 633550  ...                None             QA
-70900  a5SVb000001v9afMAA  HE- 633552  ...                None             QA
+70945  a5SVb000001vENRMA2  HE- 633711  ...                None             QA
+70946  a5SVb000001vEQfMAM  HE- 633713  ...                None             QA
+70947  a5SVb000001vEX7MAM  HE- 633717  ...                None             QA
+70948  a5SVb000001vEfBMAU  HE- 633722  ...                None             QA
+70949  a5SVb000001vEiPMAU  HE- 633724  ...                None             QA
 
-[70901 rows x 81 columns]
-=======
-70889  a5SVb000001uxknMAA  HE- 633286  ...                None             QA
-70890  a5SVb000001uxpdMAA  HE- 633289  ...                None             QA
-70891  a5SVb000001uxrFMAQ  HE- 633290  ...                None             QA
-70892  a5SVb000001uy2XMAQ  HE- 633297  ...                None             QA
-70893  a5SVb000001uy49MAA  HE- 633298  ...                None             QA
-
-[70894 rows x 81 columns]
->>>>>>> main
+[70950 rows x 81 columns]
 SELECT Id, Name
 FROM User
 df_user info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 192878 entries, 0 to 192877
+RangeIndex: 193206 entries, 0 to 193205
 Data columns (total 2 columns):
  #   Column  Non-Null Count   Dtype 
 ---  ------  --------------   ----- 
- 0   Id      192878 non-null  object
- 1   Name    192878 non-null  object
+ 0   Id      193206 non-null  object
+ 1   Name    193206 non-null  object
 dtypes: object(2)
 memory usage: 2.9+ MB
 None
-df_user shape: (192878, 2)
-                        Id              Name
-0       0050g000005YyydAAC      Louis Albert
-1       0050g000005Yz1rAAC      Alvin Sonier
-2       0050g000005Yz2BAAS   Benjamin Palmer
-3       0050g000005Yz47AAC        Mehul Bhat
-4       0050g000005YzsCAAS   Herald Selmanaj
-...                    ...               ...
-192873  005Vb00000KWFwTIAX     Giana Gilbert
-192874  005Vb00000KWHDVIA5      Saunak Patel
-192875  005Vb00000KWHTdIAP  Kristina Russell
-192876  005Vb00000KWHgXIAX    Melanie Perdue
-192877  005Vb00000KWI7xIAH   Courtney Gordon
+df_user shape: (193206, 2)
+                        Id                   Name
+0       0050g000005YyydAAC           Louis Albert
+1       0050g000005Yz1rAAC           Alvin Sonier
+2       0050g000005Yz2BAAS        Benjamin Palmer
+3       0050g000005Yz47AAC             Mehul Bhat
+4       0050g000005YzsCAAS        Herald Selmanaj
+...                    ...                    ...
+193201  005Vb00000KanGPIAZ                hang su
+193202  005Vb00000KaprhIAB     Krishnaji Adhikari
+193203  005Vb00000KaptKIAR     Krishnaji Adhikari
+193204  005Vb00000Kav2fIAB  Nawanida Sammarungroj
+193205  005Vb00000KavibIAB      Chinthaka Rajitha
 
-[192878 rows x 2 columns]
+[193206 rows x 2 columns]
 SELECT Id, Name, Openings_Manager__c, Previously_Affiliated_Brand__c, Distribution_Launch_Manager__c, Opportunity__c
 FROM Contract
 where Current_Site_Indicator__c = 'Y'
 df_contract info:
 <class 'pandas.core.frame.DataFrame'>
-<<<<<<< HEAD
-RangeIndex: 26387 entries, 0 to 26386
+RangeIndex: 26392 entries, 0 to 26391
 Data columns (total 6 columns):
  #   Column                       Non-Null Count  Dtype 
 ---  ------                       --------------  ----- 
- 0   Contract ID                  26387 non-null  object
- 1   Contract Name                26387 non-null  object
+ 0   Contract ID                  26392 non-null  object
+ 1   Contract Name                26392 non-null  object
  2   Openings_Manager             5238 non-null   object
- 3   Previously_Affiliated_Brand  13622 non-null  object
+ 3   Previously_Affiliated_Brand  13624 non-null  object
  4   Distribution_Launch_Manager  2836 non-null   object
- 5   Opportunity__c               16992 non-null  object
+ 5   Opportunity__c               16998 non-null  object
 dtypes: object(6)
 memory usage: 1.2+ MB
 None
-df_contract shape: (26387, 6)
+df_contract shape: (26392, 6)
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 26387 entries, 0 to 26386
+RangeIndex: 26392 entries, 0 to 26391
 Data columns (total 6 columns):
  #   Column                       Non-Null Count  Dtype 
 ---  ------                       --------------  ----- 
- 0   Contract ID                  26387 non-null  object
- 1   Contract Name                26387 non-null  object
- 2   Previously_Affiliated_Brand  13622 non-null  object
- 3   Opportunity__c               16992 non-null  object
+ 0   Contract ID                  26392 non-null  object
+ 1   Contract Name                26392 non-null  object
+ 2   Previously_Affiliated_Brand  13624 non-null  object
+ 3   Opportunity__c               16998 non-null  object
  4   Openings_Manager             5238 non-null   object
  5   Distribution_Launch_Manager  2836 non-null   object
 dtypes: object(6)
 memory usage: 1.2+ MB
-=======
-RangeIndex: 59619 entries, 0 to 59618
-Data columns (total 2 columns):
- #   Column         Non-Null Count  Dtype 
----  ------         --------------  ----- 
- 0   Contract ID    59619 non-null  object
- 1   Contract Name  59605 non-null  object
-dtypes: object(2)
-memory usage: 931.7+ KB
-None
-df_contract shape: (59619, 2)
-              Contract ID       Contract Name
-0      8000g000001B5PdAAK  54808-15760-01-LFD
-1      8000g000001B5QMAA0  49140-15761-02-RAH
-2      8000g000001B5QvAAK  54817-15763-01-BAY
-3      8000g000001B5T1AAK  54818-15764-01-TRA
-4      8000g000001B5T2AAK  54819-15765-02-RAM
-...                   ...                 ...
-59614  800Vb00000yV4WFIA0  61425-88947-01-SUP
-59615  800Vb00000yVOptIAG  61427-88947-01-SUP
-59616  800Vb00000yVWfNIAW  61428-28443-01-DFY
-59617  800Vb00000yVtk3IAC  17725-28444-04-TFD
-59618  800Vb00000yWZbBIAW  59123-28445-02-TFD
-
-[59619 rows x 2 columns]
->>>>>>> main
 SELECT id,
        ownerid,
        NAME,
@@ -645,110 +430,51 @@ FROM   waiver__c
 where isdeleted = False
 df_waiver info:
 <class 'pandas.core.frame.DataFrame'>
-<<<<<<< HEAD
-RangeIndex: 50636 entries, 0 to 50635
+RangeIndex: 50716 entries, 0 to 50715
 Data columns (total 37 columns):
  #   Column                           Non-Null Count  Dtype  
 ---  ------                           --------------  -----  
- 0   Id                               50636 non-null  object 
- 1   Owner Id                         50636 non-null  object 
- 2   Name                             50636 non-null  object 
- 3   Created Date                     50636 non-null  object 
- 4   Last Modified Date               50636 non-null  object 
- 5   System Modstamp                  50636 non-null  object 
- 6   Last Activity Date               21 non-null     object 
- 7   Account                          49816 non-null  object 
- 8   Brand Standards Description      50417 non-null  object 
+ 0   Id                               50716 non-null  object 
+ 1   Owner Id                         50716 non-null  object 
+ 2   Name                             50716 non-null  object 
+ 3   Created Date                     50716 non-null  object 
+ 4   Last Modified Date               50716 non-null  object 
+ 5   System Modstamp                  50716 non-null  object 
+ 6   Last Activity Date               22 non-null     object 
+ 7   Account                          49896 non-null  object 
+ 8   Brand Standards Description      50497 non-null  object 
  9   Comments to Waiver Requestor     3054 non-null   object 
- 10  Contract Status                  50613 non-null  float64
- 11  Contract                         50636 non-null  object 
-=======
-RangeIndex: 50607 entries, 0 to 50606
-Data columns (total 37 columns):
- #   Column                           Non-Null Count  Dtype  
----  ------                           --------------  -----  
- 0   Id                               50607 non-null  object 
- 1   Owner Id                         50607 non-null  object 
- 2   Name                             50607 non-null  object 
- 3   Created Date                     50607 non-null  object 
- 4   Last Modified Date               50607 non-null  object 
- 5   System Modstamp                  50607 non-null  object 
- 6   Last Activity Date               21 non-null     object 
- 7   Account                          49787 non-null  object 
- 8   Brand Standards Description      50388 non-null  object 
- 9   Comments to Waiver Requestor     3054 non-null   object 
- 10  Contract Status                  50584 non-null  float64
- 11  Contract                         50607 non-null  object 
->>>>>>> main
+ 10  Contract Status                  50693 non-null  float64
+ 11  Contract                         50716 non-null  object 
  12  Date of Request                  4 non-null      object 
  13  Date of approval                 666 non-null    object 
  14  Hotel Engagement Item            0 non-null      object 
  15  Inspection Category              0 non-null      object 
-<<<<<<< HEAD
- 16  Internal Comments                13874 non-null  object 
+ 16  Internal Comments                13905 non-null  object 
  17  Internal Description             67 non-null     object 
- 18  Site ID                          50636 non-null  object 
+ 18  Site ID                          50716 non-null  object 
  19  Waiver Approver                  0 non-null      object 
- 20  Waiver Description               48996 non-null  object 
- 21  Waiver Expiration Date           37816 non-null  object 
- 22  Waiver Rationale                 50502 non-null  object 
- 23  Waiver Requested Extension Date  50526 non-null  object 
- 24  Waiver Status                    50630 non-null  object 
- 25  Waiver Type                      50549 non-null  object 
+ 20  Waiver Description               49076 non-null  object 
+ 21  Waiver Expiration Date           37843 non-null  object 
+ 22  Waiver Rationale                 50582 non-null  object 
+ 23  Waiver Requested Extension Date  50606 non-null  object 
+ 24  Waiver Status                    50710 non-null  object 
+ 25  Waiver Type                      50629 non-null  object 
  26  Property Brand Standards         8525 non-null   object 
- 27  BSD Category                     50388 non-null  object 
- 28  BSD Subcategory                  50388 non-null  object 
- 29  Brand Standard Number            50417 non-null  object 
- 30  Expired                          50636 non-null  bool   
- 31  Waiver Classification            20089 non-null  object 
-=======
- 16  Internal Comments                13873 non-null  object 
- 17  Internal Description             67 non-null     object 
- 18  Site ID                          50607 non-null  object 
- 19  Waiver Approver                  0 non-null      object 
- 20  Waiver Description               48967 non-null  object 
- 21  Waiver Expiration Date           37811 non-null  object 
- 22  Waiver Rationale                 50473 non-null  object 
- 23  Waiver Requested Extension Date  50497 non-null  object 
- 24  Waiver Status                    50601 non-null  object 
- 25  Waiver Type                      50520 non-null  object 
- 26  Property Brand Standards         8525 non-null   object 
- 27  BSD Category                     50359 non-null  object 
- 28  BSD Subcategory                  50359 non-null  object 
- 29  Brand Standard Number            50388 non-null  object 
- 30  Expired                          50607 non-null  bool   
- 31  Waiver Classification            20060 non-null  object 
->>>>>>> main
- 32  Account DFO                      32690 non-null  object 
- 33  Expected Ship Date               129 non-null    object 
- 34  Waiver Additional Details        977 non-null    object 
- 35  Waiver Conditional Details       1087 non-null   object 
-<<<<<<< HEAD
- 36  Waiver Sub                       14205 non-null  object 
+ 27  BSD Category                     50468 non-null  object 
+ 28  BSD Subcategory                  50468 non-null  object 
+ 29  Brand Standard Number            50497 non-null  object 
+ 30  Expired                          50716 non-null  bool   
+ 31  Waiver Classification            20169 non-null  object 
+ 32  Account DFO                      32692 non-null  object 
+ 33  Expected Ship Date               130 non-null    object 
+ 34  Waiver Additional Details        978 non-null    object 
+ 35  Waiver Conditional Details       1089 non-null   object 
+ 36  Waiver Sub                       14256 non-null  object 
 dtypes: bool(1), float64(1), object(35)
 memory usage: 14.0+ MB
 None
-df_waiver shape: (50636, 37)
-                       Id  ...                    Waiver Sub
-0      a5b4u000000rUJ2AAM  ...                          None
-1      a5b4u000000rUJ7AAM  ...                          None
-2      a5b4u000000rUJHAA2  ...                          None
-3      a5b4u000000rUJRAA2  ...                          None
-4      a5b4u000000rUJSAA2  ...                          None
-...                   ...  ...                           ...
-50631  a5bVb000000HtGDIA0  ...             QA Pre Inspection
-50632  a5bVb000000HtHpIAK  ...                          None
-50633  a5bVb000000HtJRIA0  ...                          None
-50634  a5bVb000000HtL3IAK  ...                          None
-50635  a5bVb000000HtMfIAK  ...  Approved During Negotiations
-
-[50636 rows x 37 columns]
-=======
- 36  Waiver Sub                       14184 non-null  object 
-dtypes: bool(1), float64(1), object(35)
-memory usage: 13.9+ MB
-None
-df_waiver shape: (50607, 37)
+df_waiver shape: (50716, 37)
                        Id  ...         Waiver Sub
 0      a5b4u000000rUJ2AAM  ...               None
 1      a5b4u000000rUJ7AAM  ...               None
@@ -756,14 +482,13 @@ df_waiver shape: (50607, 37)
 3      a5b4u000000rUJRAA2  ...               None
 4      a5b4u000000rUJSAA2  ...               None
 ...                   ...  ...                ...
-50602  a5bVb000000HsLlIAK  ...  QA Pre Inspection
-50603  a5bVb000000HsNNIA0  ...  QA Pre Inspection
-50604  a5bVb000000HsOzIAK  ...  QA Pre Inspection
-50605  a5bVb000000HsQbIAK  ...  QA Pre Inspection
-50606  a5bVb000000HsSDIA0  ...  QA Pre Inspection
+50711  a5bVb000000HvUvIAK  ...               None
+50712  a5bVb000000HvWXIA0  ...    Vendor Concerns
+50713  a5bVb000000HvY9IAK  ...  QA Pre Inspection
+50714  a5bVb000000HvZlIAK  ...  QA Pre Inspection
+50715  a5bVb000000HvbNIAS  ...  QA Pre Inspection
 
-[50607 rows x 37 columns]
->>>>>>> main
+[50716 rows x 37 columns]
 SELECT  Id,Description__c
 FROM Brand_Standards_Description__c 
 where isdeleted = False
@@ -793,7 +518,6 @@ df_brand_std_desc shape: (678, 2)
 677  a57Vb000000D4H7IAK  100.02.46: Administrative Policies > Programs ...
 
 [678 rows x 2 columns]
-<<<<<<< HEAD
 SELECT
 Id, 
 Name, 
@@ -869,28 +593,28 @@ None
 SELECT id, recordtypeid, whoid, whatid, whocount, whatcount, subject, activitydate, status, priority, ishighpriority, ownerid, description, type, isdeleted, accountid, tasksubtype, completeddatetime, task_type__c, comments__c, gsofollowupdate__c, results__c, gsoactivity_reason__c, original_task_id__c, next_steps__c, cr_case__c, tag__c, site_visit_metric__c, item__c, journal_subject__c, task_origin__c, action_plan_name__c, action_plan__c, actvty_id__c, approval_status__c, category_name__c, completion_date__c, contract_name__c, marked_complete_date__c, task_subcategory__c, state__c, whr_initiative_type__c FROM task WHERE subject IN ('Live on Expedia.com', 'Live on Booking.com', 'Live on Agoda.com', 'Live on Priceline.com', 'Live on Brand.com')
 df_action_plans_ota info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 4126 entries, 0 to 4125
+RangeIndex: 4141 entries, 0 to 4140
 Data columns (total 42 columns):
  #   Column                   Non-Null Count  Dtype 
 ---  ------                   --------------  ----- 
- 0   id                       4126 non-null   object
- 1   recordtypeid             4126 non-null   object
+ 0   id                       4141 non-null   object
+ 1   recordtypeid             4141 non-null   object
  2   whoid                    0 non-null      object
- 3   whatid                   4126 non-null   object
- 4   whocount                 4126 non-null   int64 
- 5   whatcount                4126 non-null   int64 
- 6   subject                  4126 non-null   object
- 7   activitydate             3876 non-null   object
- 8   status                   4126 non-null   object
- 9   priority                 4126 non-null   object
- 10  ishighpriority           4126 non-null   bool  
- 11  ownerid                  4126 non-null   object
- 12  description              4126 non-null   object
+ 3   whatid                   4141 non-null   object
+ 4   whocount                 4141 non-null   int64 
+ 5   whatcount                4141 non-null   int64 
+ 6   subject                  4141 non-null   object
+ 7   activitydate             3891 non-null   object
+ 8   status                   4141 non-null   object
+ 9   priority                 4141 non-null   object
+ 10  ishighpriority           4141 non-null   bool  
+ 11  ownerid                  4141 non-null   object
+ 12  description              4141 non-null   object
  13  type                     3056 non-null   object
- 14  isdeleted                4126 non-null   bool  
- 15  accountid                4126 non-null   object
- 16  tasksubtype              4126 non-null   object
- 17  completeddatetime        982 non-null    object
+ 14  isdeleted                4141 non-null   bool  
+ 15  accountid                4141 non-null   object
+ 16  tasksubtype              4141 non-null   object
+ 17  completeddatetime        988 non-null    object
  18  task_type__c             0 non-null      object
  19  comments__c              9 non-null      object
  20  gsofollowupdate__c       0 non-null      object
@@ -904,13 +628,13 @@ Data columns (total 42 columns):
  28  item__c                  0 non-null      object
  29  journal_subject__c       0 non-null      object
  30  task_origin__c           0 non-null      object
- 31  action_plan_name__c      3430 non-null   object
- 32  action_plan__c           3430 non-null   object
- 33  actvty_id__c             4126 non-null   object
- 34  approval_status__c       1069 non-null   object
- 35  category_name__c         4126 non-null   object
- 36  completion_date__c       983 non-null    object
- 37  contract_name__c         3415 non-null   object
+ 31  action_plan_name__c      3440 non-null   object
+ 32  action_plan__c           3440 non-null   object
+ 33  actvty_id__c             4141 non-null   object
+ 34  approval_status__c       1084 non-null   object
+ 35  category_name__c         4141 non-null   object
+ 36  completion_date__c       989 non-null    object
+ 37  contract_name__c         3425 non-null   object
  38  marked_complete_date__c  0 non-null      object
  39  task_subcategory__c      0 non-null      object
  40  state__c                 0 non-null      object
@@ -923,23 +647,23 @@ FROM Opportunity
 where isdeleted = False and Deal_Type__c = 'Licensing' and Managed_Franchised__c = 'Franchised' and StageName = 'Closed Won'
 df_owner info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 11330 entries, 0 to 11329
+RangeIndex: 11333 entries, 0 to 11332
 Data columns (total 4 columns):
  #   Column            Non-Null Count  Dtype 
 ---  ------            --------------  ----- 
- 0   OwnerId           11330 non-null  object
- 1   Contract_Name__c  11220 non-null  object
- 2   Opportunity Name  11330 non-null  object
- 3   Opportunity Id    11330 non-null  object
+ 0   OwnerId           11333 non-null  object
+ 1   Contract_Name__c  11223 non-null  object
+ 2   Opportunity Name  11333 non-null  object
+ 3   Opportunity Id    11333 non-null  object
 dtypes: object(4)
-memory usage: 354.2+ KB
+memory usage: 354.3+ KB
 None
 <class 'pandas.core.series.Series'>
-Index: 139410 entries, 77 to 779227
+Index: 139460 entries, 77 to 780283
 Series name: Contract Name
 Non-Null Count   Dtype 
 --------------   ----- 
-139410 non-null  object
+139460 non-null  object
 dtypes: object(1)
 memory usage: 2.1+ MB
 SELECT Photo_Shoot_Actual_Date__c, Contract_Name__c, Name
@@ -951,20 +675,20 @@ FROM Photo_Shoot__c
 3     00042-04339-05-LFD              2019-11-09
 4     00049-15432-05-RAM              2025-05-02
 ...                  ...                     ...
-8746  70216-06202-05-BAY              2016-05-11
-8747  70231-09357-05-BAY              2016-07-19
-8748  70233-10462-04-BAY              2015-09-08
-8749  71222-81731-02-RAI                     NaT
-8750  99997-00000-01-RAM              2026-02-10
+8747  70216-06202-05-BAY              2016-05-11
+8748  70231-09357-05-BAY              2016-07-19
+8749  70233-10462-04-BAY              2015-09-08
+8750  71222-81731-02-RAI                     NaT
+8751  99997-00000-01-RAM              2026-02-10
 
-[8751 rows x 2 columns]
+[8752 rows x 2 columns]
 df_photo info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 8751 entries, 0 to 8750
+RangeIndex: 8752 entries, 0 to 8751
 Data columns (total 2 columns):
  #   Column                   Non-Null Count  Dtype         
 ---  ------                   --------------  -----         
- 0   Contract_Name__c         8751 non-null   object        
+ 0   Contract_Name__c         8752 non-null   object        
  1   Latest_Photo_Shoot_Date  7739 non-null   datetime64[ns]
 dtypes: datetime64[ns](1), object(1)
 memory usage: 136.9+ KB
@@ -974,37 +698,37 @@ FROM Account
 where isdeleted = False and Site_Status__c = '7'
 df_account info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 9218 entries, 0 to 9217
+RangeIndex: 9219 entries, 0 to 9218
 Data columns (total 3 columns):
  #   Column                      Non-Null Count  Dtype 
 ---  ------                      --------------  ----- 
  0   FEMA_ID__c                  5010 non-null   object
- 1   Contract_Name__c            9218 non-null   object
+ 1   Contract_Name__c            9219 non-null   object
  2   FEMA_ID_Expiration_Date__c  0 non-null      object
 dtypes: object(3)
 memory usage: 216.2+ KB
 None
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 26387 entries, 0 to 26386
+RangeIndex: 26392 entries, 0 to 26391
 Data columns (total 33 columns):
  #   Column                              Non-Null Count  Dtype  
 ---  ------                              --------------  -----  
  0   contract_name__c                    208 non-null    object 
  1   Live on Agoda.com                   185 non-null    object 
- 2   Live on Booking.com                 184 non-null    object 
+ 2   Live on Booking.com                 190 non-null    object 
  3   Live on Brand.com                   206 non-null    object 
  4   Live on Expedia.com                 198 non-null    object 
  5   Live on Priceline.com               181 non-null    object 
- 6   Contract ID                         26387 non-null  object 
- 7   Contract Name                       26387 non-null  object 
+ 6   Contract ID                         26392 non-null  object 
+ 7   Contract Name                       26392 non-null  object 
  8   Openings_Manager                    5238 non-null   object 
- 9   Previously_Affiliated_Brand         13564 non-null  object 
+ 9   Previously_Affiliated_Brand         13566 non-null  object 
  10  Distribution_Launch_Manager         2836 non-null   object 
- 11  Opportunity__c                      16992 non-null  object 
- 12  Contract_Name__c_x                  8612 non-null   object 
- 13  Opportunity Name                    8618 non-null   object 
- 14  Opportunity Id                      8618 non-null   object 
- 15  Opportunity Owner                   8618 non-null   object 
+ 11  Opportunity__c                      16998 non-null  object 
+ 12  Contract_Name__c_x                  8615 non-null   object 
+ 13  Opportunity Name                    8621 non-null   object 
+ 14  Opportunity Id                      8621 non-null   object 
+ 15  Opportunity Owner                   8621 non-null   object 
  16  contract__c                         715 non-null    object 
  17  Completed_Tasks_Count__c            715 non-null    float64
  18  Total_Tasks_Count__c                715 non-null    float64
@@ -1017,16 +741,52 @@ Data columns (total 33 columns):
  25  Waiver Closed - Not Completed       7858 non-null   float64
  26  Waiver Open                         7858 non-null   float64
  27  Waiver Submitted                    7858 non-null   float64
- 28  Contract_Name__c_y                  5755 non-null   object 
- 29  Latest_Photo_Shoot_Date             5023 non-null   object 
+ 28  Contract_Name__c_y                  5754 non-null   object 
+ 29  Latest_Photo_Shoot_Date             5021 non-null   object 
  30  FEMA_ID__c                          5010 non-null   object 
- 31  Contract_Name__c                    9218 non-null   object 
+ 31  Contract_Name__c                    9219 non-null   object 
  32  FEMA_ID_Expiration_Date__c          0 non-null      float64
 dtypes: float64(12), object(21)
 memory usage: 6.6+ MB
 Script completed successfully
-2026-06-08 13:08:36
+2026-06-10 05:10:38
 Sending success email...
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'anshul.maathur1@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'eric.kwok@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'daniel.dai@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'brian.mohr@wyndham.com'
+New relay email code ran successfully.
+
 Trying new email relay code.
 Checking for an email attachment.
 ['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
@@ -1036,7 +796,3 @@ Email will be sent to the following:
 'businessintelligence@wyndham.com'
 New relay email code ran successfully.
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> main
