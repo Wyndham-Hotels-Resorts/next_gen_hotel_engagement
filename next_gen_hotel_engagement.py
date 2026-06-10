@@ -39,6 +39,7 @@ action_plans_ota = 'action_plans_ota'
 fileName_photo = 'photo'
 fileName_account = 'FEMA Account'
 fileName_owner = 'opportunity owner'
+fileName_funding = 'funding'
 
 spaceID = '0f8fd184-9964-4ecb-a8a0-dad517e12dab'  # WHR Business Intelligence - Production
 
@@ -549,6 +550,32 @@ def sf_owner(_sf, _sf_queries_dir) -> pd.DataFrame:
     df_merged.to_csv(file_path_outputs + fileName_owner + '.csv', index=False, sep=',', header=True,
                     date_format='%Y-%m-%d')
     
+def sf_funding(_sf, _sf_queries_dir) -> pd.DataFrame:
+    
+    with open(rf'{_sf_queries_dir}funding_query.txt') as q:
+        funding_query = q.read()
+    
+    print(funding_query)
+    funding_dict = _sf.query_all(funding_query)
+    
+    funding_query = pd.DataFrame(funding_dict['records']).drop(columns=['attributes'])
+    funding_query.columns = ['Id', 'Name', 'Contract Id']
+    
+    print('funding_query info:')
+    print(funding_query.info())
+    print(f'funding_query shape: {funding_query.shape}')
+    
+    funding_query['Id'] = funding_query['Id'].astype(str)
+    
+    funding_query = funding_query[['Id', 'Name', 'Contract Id']]
+    
+    print(funding_query)
+
+    funding_query.to_csv(file_path_outputs + 'Funding' + '.csv', index=False, sep=',', header=True,
+                date_format='%Y-%m-%d')
+       
+    return funding_query
+    
 try:
     # if __name__=='__main__':
     
@@ -665,7 +692,7 @@ try:
     
     sf_contract = sf_contract(sf, sf_queries_dir)
     
-    # sf_contract = sf_contract[['Contract ID', 'Contract Name']]
+    
     
     sf_waiver = sf_waiver(sf, sf_queries_dir)
     
@@ -693,25 +720,31 @@ try:
                 date_format='%Y-%m-%d')
     
     
-    ########################## Brand Champion Dashboard ###########################################
+    # ########################## Brand Champion Dashboard ###########################################
     
-    ################Get OTA Status Go-Live Dates, AP Task Completion, Opening Manager, Previous Affiliated, Distribution Launch Manager, opportunity owner  #########
+    # ################Get OTA Status Go-Live Dates, AP Task Completion, Opening Manager, Previous Affiliated, Distribution Launch Manager, opportunity owner  #########
   
     
     sf_act_pln = sf_action_plans(sf, sf_queries_dir)
-    
-    # sf_user = sf_user(sf, sf_queries_dir)
-    
-    # sf_contract = sf_contract(sf, sf_queries_dir)
     
     sf_act_pln_ota = sf_action_plans_ota(sf, sf_queries_dir)
     
     sf_owner = sf_owner(sf, sf_queries_dir)
     
+    sf_funding = sf_funding(sf, sf_queries_dir)
+    
     sf_act_pln = pd.read_csv(file_path_outputs + fileName_action_plans + '.csv')
     sf_contract = pd.read_csv(file_path_outputs + fileName_contract + '.csv')
     sf_act_pln_ota = pd.read_csv(file_path_outputs + action_plans_ota  + '.csv')
     sf_owner = pd.read_csv(file_path_outputs + fileName_owner + '.csv')
+    sf_funding = pd.read_csv(file_path_outputs + fileName_funding + '.csv')
+    
+    merged_df = sf_contract.merge(sf_funding, how='left', left_on='Contract ID', right_on='Contract Id')
+    
+    merged_df = merged_df.groupby(['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c']).agg(
+    Number_of_Installments=('Id', 'count')
+    ).reset_index()
+    
     
     merged_df = sf_contract.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
     
@@ -765,6 +798,9 @@ try:
     final_df = final_df.round(2)
 
     final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    
+    final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
     
     merge_df2 = merge_df2.merge(final_df, how='left', left_on='Contract Name', right_on='Contract Name')
     
