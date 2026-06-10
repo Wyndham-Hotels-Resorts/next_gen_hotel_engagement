@@ -746,7 +746,7 @@ try:
     ).reset_index()
     
     
-    merged_df = sf_contract.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
+    merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
     
     # merged_df.to_csv(file_path_outputs + 'owner_contract' + '.csv', index=False, sep=',', header=True,
     #             date_format='%Y-%m-%d')
