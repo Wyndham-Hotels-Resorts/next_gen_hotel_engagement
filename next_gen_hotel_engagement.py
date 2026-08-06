@@ -214,7 +214,7 @@ def sf_user(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     df_user = df_user[['Id', 'Name']]
     
-    print(df_user)
+    # print(df_user)
 
     df_user.to_csv(file_path_outputs + fileName_user + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
@@ -757,9 +757,55 @@ try:
     
     # # #################### Add PIP Completion, active waiver count #####################
     
+    # df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
+    # df = df[df['PIP Type'] == 'Standard']
+    # df['Contract Name'].info()
+    # # 2. Pivot to get status counts per Contract and Time Frame
+    # df_pivot = df.pivot_table(
+    #     index=['Contract Name', 'Time Frame'], 
+    #     columns='Hotel Engagement Status', 
+    #     values='Status Count', 
+    #     aggfunc='sum',
+    #     fill_value=0
+    #     )
+    
+    # # 3. Ensure 'Submitted' and 'Approved' columns exist 
+    # # (This prevents errors if a certain status doesn't appear in your raw data)
+    # for col in ['Submitted', 'Approved']:
+    #     if col not in df_pivot.columns:
+    #         df_pivot[col] = 0
+            
+    # # 4. Calculate the %: (Submitted + Approved) / Total of all statuses
+    # # We sum across the row to get the denominator
+    # total_counts = df_pivot.sum(axis=1)
+    # df_pivot['Submitted %'] = ((df_pivot['Submitted'] + df_pivot['Approved']) / total_counts) 
+            
+    # # 5. Second Pivot: Move 'Time Frame' to Column headers
+    # df_rates = df_pivot[['Submitted %']].reset_index()
+    # final_df = df_rates.pivot(
+    #             index='Contract Name', 
+    #             columns='Time Frame', 
+    #             values='Submitted %'
+    #             )
+            
+    # # 6. Final Formatting
+    # # Rename columns to include "submitted %" suffix
+    # final_df.columns = [f"{col} submitted %" for col in final_df.columns]
+    # # Fill missing combinations with 0 and move Contract Number back to a column
+    # final_df = final_df.reset_index().fillna(0)
+            
+    # # Optional: Round to 2 decimal places
+    # final_df = final_df.round(2)
+
+    # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    
+    # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    # final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
+    
     df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
     df = df[df['PIP Type'] == 'Standard']
     df['Contract Name'].info()
+    
     # 2. Pivot to get status counts per Contract and Time Frame
     df_pivot = df.pivot_table(
         index=['Contract Name', 'Time Frame'], 
@@ -767,65 +813,69 @@ try:
         values='Status Count', 
         aggfunc='sum',
         fill_value=0
-        )
+    )
     
-    # 3. Ensure 'Submitted' and 'Approved' columns exist 
-    # (This prevents errors if a certain status doesn't appear in your raw data)
+    # 3. Ensure necessary columns exist to prevent KeyError
     for col in ['Submitted', 'Approved']:
         if col not in df_pivot.columns:
             df_pivot[col] = 0
             
-    # 4. Calculate the %: (Submitted + Approved) / Total of all statuses
-    # We sum across the row to get the denominator
-    total_counts = df_pivot.sum(axis=1)
-    df_pivot['Submitted %'] = ((df_pivot['Submitted'] + df_pivot['Approved']) / total_counts) 
+    # 4. Calculate raw counts for your groups
+    # Total count is the sum of all statuses combined (sum across the row)
+    df_pivot['total count'] = df_pivot.sum(axis=1)
+    # Combined count for Submitted + Approved
+    df_pivot['submitted/approved count'] = df_pivot['Submitted'] + df_pivot['Approved']
             
-    # 5. Second Pivot: Move 'Time Frame' to Column headers
-    df_rates = df_pivot[['Submitted %']].reset_index()
-    final_df = df_rates.pivot(
-                index='Contract Name', 
-                columns='Time Frame', 
-                values='Submitted %'
-                )
+    # 5. Second Pivot: Move 'Time Frame' to Column headers 
+    df_counts = df_pivot[['submitted/approved count', 'total count']].reset_index()
+    final_df = df_counts.pivot(
+        index='Contract Name', 
+        columns='Time Frame', 
+        values=['submitted/approved count', 'total count']
+    )
             
-    # 6. Final Formatting
-    # Rename columns to include "submitted %" suffix
-    final_df.columns = [f"{col} submitted %" for col in final_df.columns]
-    # Fill missing combinations with 0 and move Contract Number back to a column
+    # 6. Final Formatting and Flattening Columns
+    # Flattens multi-level columns to: "6 Months submitted/approved count", "6 Months total count", etc.
+    final_df.columns = [f"{time_frame} {metric}" for metric, time_frame in final_df.columns]
     final_df = final_df.reset_index().fillna(0)
-            
-    # Optional: Round to 2 decimal places
-    final_df = final_df.round(2)
 
-    final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    # 7. Select and reorder exactly the columns you want
+    final_df = final_df[[
+        'Contract Name', 
+        '6 Months submitted/approved count', '6 Months total count', 
+        '12 Months submitted/approved count', '12 Months total count',
+        'Within Noted Timeframe submitted/approved count', 'Within Noted Timeframe total count',
+        'PTO submitted/approved count', 'PTO total count'
+    ]]
     
-    final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+    # 8. Add the PIP prefix to everything except 'Contract Name'
     final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
     
     merge_df2 = merge_df2.merge(final_df, how='left', left_on='Contract Name', right_on='Contract Name')
     
-    df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
+    df = pd.read_csv(file_path_outputs + 'Waiver' + '.csv')
     
-    df = df[['Count of Waivers', 'Hotel Engagement Status', 'Contract Name']]
+    df = df[df['Expired'].astype(str).str.upper() == 'FALSE']
+    
+    df = df[[ 'Waiver Status', 'Contract']]
     
     pivot_df = df.pivot_table(
-    index='Contract Name', 
-    columns='Hotel Engagement Status', 
-    values='Count of Waivers', 
-    aggfunc='sum',
+    index='Contract', 
+    columns='Waiver Status', 
+    aggfunc='size',
     fill_value=0
     ).reset_index()
     
     pivot_df.columns = [
-    f'Waiver {col}' if col != 'Contract Name' else col 
+    f'Waiver {col}' if col != 'Contract' else col 
     for col in pivot_df.columns
     ]
-   
-    merge_df2 = merge_df2.merge(pivot_df, how='left', left_on='Contract Name', right_on='Contract Name')
+    # pivot_df.info()
+    merge_df2 = merge_df2.merge(pivot_df, how='left', left_on='Contract ID', right_on='Contract')
     
     ####### Get photo date ##############
     
-    df_photo = sf_photo(sf, sf_queries_dir)
+    # df_photo = sf_photo(sf, sf_queries_dir)
     
     df_photo = pd.read_csv(file_path_outputs + fileName_photo  + '.csv')
     
@@ -833,7 +883,7 @@ try:
     
     ###### FEMA #################
     
-    df_account = sf_account(sf, sf_queries_dir)
+    # df_account = sf_account(sf, sf_queries_dir)
     
     df_account = pd.read_csv(file_path_outputs + fileName_account + '.csv')
     
