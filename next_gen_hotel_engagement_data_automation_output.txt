@@ -14,7 +14,7 @@ data DF:
 1          RAI                        none  ...               None         None
 2          WDF                        none  ...               None         None
 3          WDF  arturo luna xochipiltecatl  ...               None         None
-4          WTW              sávio bromberg  ...               None         None
+4          WTW              sï¿½vio bromberg  ...               None         None
 ...        ...                         ...  ...                ...          ...
 1531       MTL                        none  ...               None         None
 1532       TFU                        none  ...               Revo       Centro
@@ -348,31 +348,31 @@ FROM Contract
 where Current_Site_Indicator__c = 'Y'
 df_contract info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 26509 entries, 0 to 26508
+RangeIndex: 26397 entries, 0 to 26396
 Data columns (total 6 columns):
  #   Column                       Non-Null Count  Dtype 
 ---  ------                       --------------  ----- 
- 0   Contract ID                  26509 non-null  object
- 1   Contract Name                26509 non-null  object
- 2   Openings_Manager             5337 non-null   object
- 3   Previously_Affiliated_Brand  13685 non-null  object
- 4   Distribution_Launch_Manager  2859 non-null   object
- 5   Opportunity__c               17124 non-null  object
+ 0   Contract ID                  26397 non-null  object
+ 1   Contract Name                26397 non-null  object
+ 2   Openings_Manager             5237 non-null   object
+ 3   Previously_Affiliated_Brand  13623 non-null  object
+ 4   Distribution_Launch_Manager  2836 non-null   object
+ 5   Opportunity__c               17003 non-null  object
 dtypes: object(6)
 memory usage: 1.2+ MB
 None
-df_contract shape: (26509, 6)
+df_contract shape: (26397, 6)
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 26509 entries, 0 to 26508
+RangeIndex: 26397 entries, 0 to 26396
 Data columns (total 6 columns):
  #   Column                       Non-Null Count  Dtype 
 ---  ------                       --------------  ----- 
- 0   Contract ID                  26509 non-null  object
- 1   Contract Name                26509 non-null  object
- 2   Previously_Affiliated_Brand  13685 non-null  object
- 3   Opportunity__c               17124 non-null  object
- 4   Openings_Manager             5337 non-null   object
- 5   Distribution_Launch_Manager  2859 non-null   object
+ 0   Contract ID                  26397 non-null  object
+ 1   Contract Name                26397 non-null  object
+ 2   Previously_Affiliated_Brand  13623 non-null  object
+ 3   Opportunity__c               17003 non-null  object
+ 4   Openings_Manager             5237 non-null   object
+ 5   Distribution_Launch_Manager  2836 non-null   object
 dtypes: object(6)
 memory usage: 1.2+ MB
 SELECT id,
