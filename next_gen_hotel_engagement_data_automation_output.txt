@@ -2,16 +2,16 @@ SELECT Id, Name
 FROM User
 df_user info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 200616 entries, 0 to 200615
+RangeIndex: 200635 entries, 0 to 200634
 Data columns (total 2 columns):
  #   Column  Non-Null Count   Dtype 
 ---  ------  --------------   ----- 
- 0   Id      200616 non-null  object
- 1   Name    200616 non-null  object
+ 0   Id      200635 non-null  object
+ 1   Name    200635 non-null  object
 dtypes: object(2)
 memory usage: 3.1+ MB
 None
-df_user shape: (200616, 2)
+df_user shape: (200635, 2)
 SELECT Id, Name, Openings_Manager__c, Previously_Affiliated_Brand__c, Distribution_Launch_Manager__c, Opportunity__c, Program_Participation__c, Application_Type__c
 FROM Contract
 where Current_Site_Indicator__c = 'Y'
@@ -23,7 +23,7 @@ Data columns (total 8 columns):
 ---  ------                       --------------  ----- 
  0   Contract ID                  26510 non-null  object
  1   Contract Name                26510 non-null  object
- 2   Openings_Manager             5338 non-null   object
+ 2   Openings_Manager             5337 non-null   object
  3   Previously_Affiliated_Brand  13686 non-null  object
  4   Distribution_Launch_Manager  2863 non-null   object
  5   Opportunity__c               17127 non-null  object
@@ -44,7 +44,7 @@ Data columns (total 8 columns):
  3   Opportunity__c               17127 non-null  object
  4   Program_Participation__c     172 non-null    object
  5   Application_Type__c          26367 non-null  object
- 6   Openings_Manager             5338 non-null   object
+ 6   Openings_Manager             5337 non-null   object
  7   Distribution_Launch_Manager  2863 non-null   object
 dtypes: object(8)
 memory usage: 1.6+ MB
@@ -144,7 +144,7 @@ Data columns (total 42 columns):
  14  isdeleted                5034 non-null   bool  
  15  accountid                5034 non-null   object
  16  tasksubtype              5034 non-null   object
- 17  completeddatetime        1180 non-null   object
+ 17  completeddatetime        1182 non-null   object
  18  task_type__c             0 non-null      object
  19  comments__c              9 non-null      object
  20  gsofollowupdate__c       0 non-null      object
@@ -163,7 +163,7 @@ Data columns (total 42 columns):
  33  actvty_id__c             5034 non-null   object
  34  approval_status__c       1528 non-null   object
  35  category_name__c         5034 non-null   object
- 36  completion_date__c       1184 non-null   object
+ 36  completion_date__c       1186 non-null   object
  37  contract_name__c         4152 non-null   object
  38  marked_complete_date__c  0 non-null      object
  39  task_subcategory__c      0 non-null      object
@@ -177,14 +177,14 @@ FROM Opportunity
 where isdeleted = False and Deal_Type__c = 'Licensing' and Managed_Franchised__c = 'Franchised' and StageName = 'Closed Won'
 df_owner info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 11476 entries, 0 to 11475
+RangeIndex: 11477 entries, 0 to 11476
 Data columns (total 4 columns):
  #   Column            Non-Null Count  Dtype 
 ---  ------            --------------  ----- 
- 0   OwnerId           11476 non-null  object
- 1   Contract_Name__c  11363 non-null  object
- 2   Opportunity Name  11476 non-null  object
- 3   Opportunity Id    11476 non-null  object
+ 0   OwnerId           11477 non-null  object
+ 1   Contract_Name__c  11364 non-null  object
+ 2   Opportunity Name  11477 non-null  object
+ 3   Opportunity Id    11477 non-null  object
 dtypes: object(4)
 memory usage: 358.8+ KB
 None
@@ -193,17 +193,17 @@ FROM Capital_Funding__c
 
 funding_query info:
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 3155 entries, 0 to 3154
+RangeIndex: 3157 entries, 0 to 3156
 Data columns (total 3 columns):
  #   Column       Non-Null Count  Dtype 
 ---  ------       --------------  ----- 
- 0   Id           3155 non-null   object
- 1   Name         3155 non-null   object
- 2   Contract Id  3155 non-null   object
+ 0   Id           3157 non-null   object
+ 1   Name         3157 non-null   object
+ 2   Contract Id  3157 non-null   object
 dtypes: object(3)
 memory usage: 74.1+ KB
 None
-funding_query shape: (3155, 3)
+funding_query shape: (3157, 3)
                       Id      Name         Contract Id
 0     aA4Vb0000000HDlKAM  CF-00000  8001I000000YuolQAC
 1     aA4Vb0000000HFNKA2  CF-00001  800Vb00000Gc0p5IAB
@@ -211,63 +211,15 @@ funding_query shape: (3155, 3)
 3     aA4Vb0000000HKDKA2  CF-00003  8004u000002hGowAAE
 4     aA4Vb0000000HNRKA2  CF-00004  8004u000002HIppAAG
 ...                  ...       ...                 ...
-3150  aA4Vb0000009PTpKAM  CF-03196  800Vb00000ySL3oIAG
-3151  aA4Vb0000009YTtKAM  CF-03197  800Vb00000JLUZmIAP
 3152  aA4Vb0000009YYjKAM  CF-03198  800Vb00000kr7tkIAA
 3153  aA4Vb0000009fNJKAY  CF-03199  800Vb00000CwjfQIAR
 3154  aA4Vb0000009pWLKAY  CF-03200  800Vb00000s7q1BIAQ
+3155  aA4Vb000000AIYLKA4  CF-03201  800Vb00000u6YgMIAU
+3156  aA4Vb000000AIdBKAW  CF-03202  800Vb00000u6YgMIAU
 
-[3155 rows x 3 columns]
-SELECT Capital_Funding__c, Funded_Amount_Date__c
-FROM Capital_Funding_Installment__c
-
-funding_query info:
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 3978 entries, 0 to 3977
-Data columns (total 2 columns):
- #   Column                 Non-Null Count  Dtype 
----  ------                 --------------  ----- 
- 0   Id                     3978 non-null   object
- 1   Funded_Amount_Date__c  711 non-null    object
-dtypes: object(2)
-memory usage: 62.3+ KB
-None
-funding_query shape: (3978, 2)
-                      Id Funded_Amount_Date__c
-0     aA4Vb0000000HDlKAM                  None
-1     aA4Vb0000000HFNKA2                  None
-2     aA4Vb0000000HIbKAM                  None
-3     aA4Vb0000000HIbKAM                  None
-4     aA4Vb0000000HIbKAM                  None
-...                  ...                   ...
-3973  aA4Vb0000009pWLKAY                  None
-3974  aA4Vb0000009pWLKAY                  None
-3975  aA4Vb0000009pWLKAY                  None
-3976  aA4Vb0000009pWLKAY                  None
-3977  aA4Vb0000000XbtKAE                  None
-
-[3978 rows x 2 columns]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 122 entries, 0 to 121
-Data columns (total 12 columns):
- #   Column                       Non-Null Count  Dtype 
----  ------                       --------------  ----- 
- 0   Contract ID                  122 non-null    object
- 1   Contract Name                122 non-null    object
- 2   Openings_Manager             122 non-null    object
- 3   Previously_Affiliated_Brand  122 non-null    object
- 4   Distribution_Launch_Manager  122 non-null    object
- 5   Opportunity__c               122 non-null    object
- 6   Program_Participation__c     122 non-null    object
- 7   Application_Type__c          122 non-null    object
- 8   Number_of_Installments       122 non-null    int64 
- 9   Id                           75 non-null     object
- 10  Contract Id                  75 non-null     object
- 11  Funded_Amount_Date__c        27 non-null     object
-dtypes: int64(1), object(11)
-memory usage: 11.6+ KB
+[3157 rows x 3 columns]
 <class 'pandas.core.series.Series'>
-Index: 141843 entries, 77 to 814355
+Index: 141843 entries, 77 to 814433
 Series name: Contract Name
 Non-Null Count   Dtype 
 --------------   ----- 
@@ -275,57 +227,99 @@ Non-Null Count   Dtype
 dtypes: object(1)
 memory usage: 2.2+ MB
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 122 entries, 0 to 121
-Data columns (total 45 columns):
+RangeIndex: 88 entries, 0 to 87
+Data columns (total 42 columns):
  #   Column                                               Non-Null Count  Dtype  
 ---  ------                                               --------------  -----  
- 0   contract_name__c                                     20 non-null     object 
- 1   Live on Agoda.com                                    20 non-null     object 
- 2   Live on Booking.com                                  18 non-null     object 
- 3   Live on Brand.com                                    20 non-null     object 
- 4   Live on Expedia.com                                  20 non-null     object 
- 5   Live on Priceline.com                                19 non-null     object 
+ 0   contract_name__c                                     18 non-null     object 
+ 1   Live on Agoda.com                                    18 non-null     object 
+ 2   Live on Booking.com                                  16 non-null     object 
+ 3   Live on Brand.com                                    18 non-null     object 
+ 4   Live on Expedia.com                                  18 non-null     object 
+ 5   Live on Priceline.com                                17 non-null     object 
  6   Google Active date                                   10 non-null     object 
- 7   Contract ID                                          122 non-null    object 
- 8   Contract Name                                        122 non-null    object 
- 9   Openings_Manager                                     122 non-null    object 
- 10  Previously_Affiliated_Brand                          122 non-null    object 
- 11  Distribution_Launch_Manager                          122 non-null    object 
- 12  Opportunity__c                                       122 non-null    object 
- 13  Program_Participation__c                             122 non-null    object 
- 14  Application_Type__c                                  122 non-null    object 
- 15  Number_of_Installments                               122 non-null    int64  
- 16  Id                                                   75 non-null     object 
- 17  Contract Id                                          75 non-null     object 
- 18  Funded_Amount_Date__c                                27 non-null     object 
- 19  Contract_Name__c_x                                   122 non-null    object 
- 20  Opportunity Name                                     122 non-null    object 
- 21  Opportunity Id                                       122 non-null    object 
- 22  Opportunity Owner                                    122 non-null    object 
- 23  contract__c                                          82 non-null     object 
- 24  Completed_Tasks_Count__c                             82 non-null     float64
- 25  Total_Tasks_Count__c                                 82 non-null     float64
- 26  PIP 6 Months submitted/approved count                93 non-null     float64
- 27  PIP 6 Months total count                             93 non-null     float64
- 28  PIP 12 Months submitted/approved count               93 non-null     float64
- 29  PIP 12 Months total count                            93 non-null     float64
- 30  PIP Within Noted Timeframe submitted/approved count  93 non-null     float64
- 31  PIP Within Noted Timeframe total count               93 non-null     float64
- 32  PIP PTO submitted/approved count                     93 non-null     float64
- 33  PIP PTO total count                                  93 non-null     float64
- 34  Contract                                             67 non-null     object 
- 35  Waiver Approved                                      67 non-null     float64
- 36  Waiver Denied                                        67 non-null     float64
- 37  Waiver More Info Needed                              67 non-null     float64
- 38  Waiver Pending                                       67 non-null     float64
- 39  Waiver Waiver Not Required                           67 non-null     float64
- 40  Contract_Name__c_y                                   46 non-null     object 
- 41  Latest_Photo_Shoot_Date                              44 non-null     object 
- 42  FEMA_ID__c                                           48 non-null     object 
- 43  Contract_Name__c                                     88 non-null     object 
- 44  FEMA_ID_Expiration_Date__c                           0 non-null      float64
-dtypes: float64(16), int64(1), object(28)
-memory usage: 43.0+ KB
+ 7   Contract ID                                          88 non-null     object 
+ 8   Contract Name                                        88 non-null     object 
+ 9   Openings_Manager                                     88 non-null     object 
+ 10  Previously_Affiliated_Brand                          88 non-null     object 
+ 11  Distribution_Launch_Manager                          88 non-null     object 
+ 12  Opportunity__c                                       88 non-null     object 
+ 13  Program_Participation__c                             88 non-null     object 
+ 14  Application_Type__c                                  88 non-null     object 
+ 15  Number_of_Installments                               88 non-null     int64  
+ 16  Contract_Name__c_x                                   88 non-null     object 
+ 17  Opportunity Name                                     88 non-null     object 
+ 18  Opportunity Id                                       88 non-null     object 
+ 19  Opportunity Owner                                    88 non-null     object 
+ 20  contract__c                                          53 non-null     object 
+ 21  Completed_Tasks_Count__c                             53 non-null     float64
+ 22  Total_Tasks_Count__c                                 53 non-null     float64
+ 23  PIP 6 Months submitted/approved count                68 non-null     float64
+ 24  PIP 6 Months total count                             68 non-null     float64
+ 25  PIP 12 Months submitted/approved count               68 non-null     float64
+ 26  PIP 12 Months total count                            68 non-null     float64
+ 27  PIP Within Noted Timeframe submitted/approved count  68 non-null     float64
+ 28  PIP Within Noted Timeframe total count               68 non-null     float64
+ 29  PIP PTO submitted/approved count                     68 non-null     float64
+ 30  PIP PTO total count                                  68 non-null     float64
+ 31  Contract                                             44 non-null     object 
+ 32  Waiver Approved                                      44 non-null     float64
+ 33  Waiver Denied                                        44 non-null     float64
+ 34  Waiver More Info Needed                              44 non-null     float64
+ 35  Waiver Pending                                       44 non-null     float64
+ 36  Waiver Waiver Not Required                           44 non-null     float64
+ 37  Contract_Name__c_y                                   29 non-null     object 
+ 38  Latest_Photo_Shoot_Date                              25 non-null     object 
+ 39  FEMA_ID__c                                           27 non-null     object 
+ 40  Contract_Name__c                                     58 non-null     object 
+ 41  FEMA_ID_Expiration_Date__c                           0 non-null      float64
+dtypes: float64(16), int64(1), object(25)
+memory usage: 29.0+ KB
 Script completed successfully
-2026-08-11 09:49:11
+2026-08-11 11:43:40
 Sending success email...
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'anshul.maathur1@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'eric.kwok@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'daniel.dai@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'brian.mohr@wyndham.com'
+New relay email code ran successfully.
+
+Trying new email relay code.
+Checking for an email attachment.
+['D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt']
+Preparing email.
+'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/next_gen_hotel_engagement_data_automation_output.txt' was attached to the email.
+Email will be sent to the following:
+'businessintelligence@wyndham.com'
+New relay email code ran successfully.
+

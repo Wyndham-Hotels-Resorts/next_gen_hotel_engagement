@@ -609,7 +609,7 @@ try:
     client = Birst_Utils.GetBirstClient()
     login = client.service.Login(Birst_Utils.GetBirstUser(), Birst_Utils.GetBirstPassword())
  
-    sf_queries_dir = 'E:/Users/699052/PythonScripts/next_gen_hotel_engagement/'  #'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'  #'E:/Users/699508/qa_pip/'
+    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699052/PythonScripts/next_gen_hotel_engagement/' 
     sf = sf_connector.sf_connect()
     
     startTime = datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S')
@@ -778,11 +778,22 @@ try:
     ).reset_index()
     
     sf_funding_date = sf_funding_date[['Id', 'Funded_Amount_Date__c']]
+
     sf_funding = sf_funding[['Id', 'Contract Id']]
     
     sf_funding_merged = sf_funding.merge(sf_funding_date, how='outer', on = 'Id')
+    
+    sf_funding_merged['Funded_Amount_Date__c'] = pd.to_datetime(sf_funding_merged['Funded_Amount_Date__c'])
+    
+    sf_funding_merged = (sf_funding_merged[['Contract Id', 'Funded_Amount_Date__c']].groupby('Contract Id', as_index=False)['Funded_Amount_Date__c'].max()) 
+    
     merged_df = merged_df.merge(sf_funding_merged, how='left', left_on='Contract ID', right_on='Contract Id')
+    merged_df = merged_df.drop(columns=['Contract Id'])
     merged_df.info()
+    # duplicate_rows = merged_df[merged_df.duplicated(subset=['Contract ID'], keep=False)]
+    # # Sort by Contract Name so the duplicates are grouped together for easy viewing
+    # duplicate_rows_sorted = duplicate_rows.sort_values(by='Contract ID')
+    # print(duplicate_rows_sorted)   
 
     
     merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
@@ -931,7 +942,8 @@ try:
     
     merge_df4 = merge_df3.merge(df_account, how='left', left_on='Contract Name', right_on='Contract_Name__c')
     merge_df4.info()
-    merge_df4 = merge_df4.drop(columns=['contract_name__c', 'Contract_Name__c_x', 'Contract_Name__c_y'])
+    merge_df4 = merge_df4.drop(columns=['contract_name__c', 'Contract_Name__c_x', 'Contract_Name__c_y', 'Contract_Name__c_x', 'Contract_Name__c_y'])
+    merge_df4 = merge_df4.drop_duplicates()
     merge_df4.to_csv(file_path_outputs + 'brand_champion_att' + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
     
