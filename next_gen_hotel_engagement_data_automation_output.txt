@@ -14,7 +14,7 @@ data DF:
 1          RAI                        none  ...               None         None
 2          WDF                        none  ...               None         None
 3          WDF  arturo luna xochipiltecatl  ...               None         None
-4          WTW              sávio bromberg  ...               None         None
+4          WTW              sï¿½vio bromberg  ...               None         None
 ...        ...                         ...  ...                ...          ...
 1532       HOJ                        none  ...               None         None
 1533       TRC           mathew st. pierre  ...               None         None
@@ -678,54 +678,6 @@ funding_query shape: (3157, 3)
 3156  aA4Vb000000AIdBKAW  CF-03202  800Vb00000u6YgMIAU
 
 [3157 rows x 3 columns]
-SELECT Capital_Funding__c, Funded_Amount_Date__c
-FROM Capital_Funding_Installment__c
-
-funding_query info:
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 3980 entries, 0 to 3979
-Data columns (total 2 columns):
- #   Column                 Non-Null Count  Dtype 
----  ------                 --------------  ----- 
- 0   Id                     3980 non-null   object
- 1   Funded_Amount_Date__c  711 non-null    object
-dtypes: object(2)
-memory usage: 62.3+ KB
-None
-funding_query shape: (3980, 2)
-                      Id Funded_Amount_Date__c
-0     aA4Vb0000000HDlKAM                  None
-1     aA4Vb0000000HFNKA2                  None
-2     aA4Vb0000000HIbKAM                  None
-3     aA4Vb0000000HIbKAM                  None
-4     aA4Vb0000000HIbKAM                  None
-...                  ...                   ...
-3975  aA4Vb0000009pWLKAY                  None
-3976  aA4Vb0000009pWLKAY                  None
-3977  aA4Vb0000000XbtKAE                  None
-3978  aA4Vb000000AIYLKA4                  None
-3979  aA4Vb000000AIdBKAW                  None
-
-[3980 rows x 2 columns]
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 122 entries, 0 to 121
-Data columns (total 12 columns):
- #   Column                       Non-Null Count  Dtype 
----  ------                       --------------  ----- 
- 0   Contract ID                  122 non-null    object
- 1   Contract Name                122 non-null    object
- 2   Openings_Manager             122 non-null    object
- 3   Previously_Affiliated_Brand  122 non-null    object
- 4   Distribution_Launch_Manager  122 non-null    object
- 5   Opportunity__c               122 non-null    object
- 6   Program_Participation__c     122 non-null    object
- 7   Application_Type__c          122 non-null    object
- 8   Number_of_Installments       122 non-null    int64 
- 9   Id                           75 non-null     object
- 10  Contract Id                  75 non-null     object
- 11  Funded_Amount_Date__c        27 non-null     object
-dtypes: int64(1), object(11)
-memory usage: 11.6+ KB
 <class 'pandas.core.series.Series'>
 Index: 141843 entries, 77 to 814433
 Series name: Contract Name
@@ -735,59 +687,56 @@ Non-Null Count   Dtype
 dtypes: object(1)
 memory usage: 2.2+ MB
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 122 entries, 0 to 121
-Data columns (total 45 columns):
+RangeIndex: 88 entries, 0 to 87
+Data columns (total 42 columns):
  #   Column                                               Non-Null Count  Dtype  
 ---  ------                                               --------------  -----  
- 0   contract_name__c                                     20 non-null     object 
- 1   Live on Agoda.com                                    20 non-null     object 
- 2   Live on Booking.com                                  18 non-null     object 
- 3   Live on Brand.com                                    20 non-null     object 
- 4   Live on Expedia.com                                  20 non-null     object 
- 5   Live on Priceline.com                                19 non-null     object 
+ 0   contract_name__c                                     18 non-null     object 
+ 1   Live on Agoda.com                                    18 non-null     object 
+ 2   Live on Booking.com                                  16 non-null     object 
+ 3   Live on Brand.com                                    18 non-null     object 
+ 4   Live on Expedia.com                                  18 non-null     object 
+ 5   Live on Priceline.com                                17 non-null     object 
  6   Google Active date                                   10 non-null     object 
- 7   Contract ID                                          122 non-null    object 
- 8   Contract Name                                        122 non-null    object 
- 9   Openings_Manager                                     122 non-null    object 
- 10  Previously_Affiliated_Brand                          122 non-null    object 
- 11  Distribution_Launch_Manager                          122 non-null    object 
- 12  Opportunity__c                                       122 non-null    object 
- 13  Program_Participation__c                             122 non-null    object 
- 14  Application_Type__c                                  122 non-null    object 
- 15  Number_of_Installments                               122 non-null    int64  
- 16  Id                                                   75 non-null     object 
- 17  Contract Id                                          75 non-null     object 
- 18  Funded_Amount_Date__c                                27 non-null     object 
- 19  Contract_Name__c_x                                   122 non-null    object 
- 20  Opportunity Name                                     122 non-null    object 
- 21  Opportunity Id                                       122 non-null    object 
- 22  Opportunity Owner                                    122 non-null    object 
- 23  contract__c                                          82 non-null     object 
- 24  Completed_Tasks_Count__c                             82 non-null     float64
- 25  Total_Tasks_Count__c                                 82 non-null     float64
- 26  PIP 6 Months submitted/approved count                93 non-null     float64
- 27  PIP 6 Months total count                             93 non-null     float64
- 28  PIP 12 Months submitted/approved count               93 non-null     float64
- 29  PIP 12 Months total count                            93 non-null     float64
- 30  PIP Within Noted Timeframe submitted/approved count  93 non-null     float64
- 31  PIP Within Noted Timeframe total count               93 non-null     float64
- 32  PIP PTO submitted/approved count                     93 non-null     float64
- 33  PIP PTO total count                                  93 non-null     float64
- 34  Contract                                             73 non-null     object 
- 35  Waiver Approved                                      73 non-null     float64
- 36  Waiver Denied                                        73 non-null     float64
- 37  Waiver More Info Needed                              73 non-null     float64
- 38  Waiver Pending                                       73 non-null     float64
- 39  Waiver Waiver Not Required                           73 non-null     float64
- 40  Contract_Name__c_y                                   46 non-null     object 
- 41  Latest_Photo_Shoot_Date                              41 non-null     object 
- 42  FEMA_ID__c                                           48 non-null     object 
- 43  Contract_Name__c                                     89 non-null     object 
- 44  FEMA_ID_Expiration_Date__c                           0 non-null      float64
-dtypes: float64(16), int64(1), object(28)
-memory usage: 43.0+ KB
+ 7   Contract ID                                          88 non-null     object 
+ 8   Contract Name                                        88 non-null     object 
+ 9   Openings_Manager                                     88 non-null     object 
+ 10  Previously_Affiliated_Brand                          88 non-null     object 
+ 11  Distribution_Launch_Manager                          88 non-null     object 
+ 12  Opportunity__c                                       88 non-null     object 
+ 13  Program_Participation__c                             88 non-null     object 
+ 14  Application_Type__c                                  88 non-null     object 
+ 15  Number_of_Installments                               88 non-null     int64  
+ 16  Contract_Name__c_x                                   88 non-null     object 
+ 17  Opportunity Name                                     88 non-null     object 
+ 18  Opportunity Id                                       88 non-null     object 
+ 19  Opportunity Owner                                    88 non-null     object 
+ 20  contract__c                                          53 non-null     object 
+ 21  Completed_Tasks_Count__c                             53 non-null     float64
+ 22  Total_Tasks_Count__c                                 53 non-null     float64
+ 23  PIP 6 Months submitted/approved count                68 non-null     float64
+ 24  PIP 6 Months total count                             68 non-null     float64
+ 25  PIP 12 Months submitted/approved count               68 non-null     float64
+ 26  PIP 12 Months total count                            68 non-null     float64
+ 27  PIP Within Noted Timeframe submitted/approved count  68 non-null     float64
+ 28  PIP Within Noted Timeframe total count               68 non-null     float64
+ 29  PIP PTO submitted/approved count                     68 non-null     float64
+ 30  PIP PTO total count                                  68 non-null     float64
+ 31  Contract                                             44 non-null     object 
+ 32  Waiver Approved                                      44 non-null     float64
+ 33  Waiver Denied                                        44 non-null     float64
+ 34  Waiver More Info Needed                              44 non-null     float64
+ 35  Waiver Pending                                       44 non-null     float64
+ 36  Waiver Waiver Not Required                           44 non-null     float64
+ 37  Contract_Name__c_y                                   29 non-null     object 
+ 38  Latest_Photo_Shoot_Date                              25 non-null     object 
+ 39  FEMA_ID__c                                           27 non-null     object 
+ 40  Contract_Name__c                                     58 non-null     object 
+ 41  FEMA_ID_Expiration_Date__c                           0 non-null      float64
+dtypes: float64(16), int64(1), object(25)
+memory usage: 29.0+ KB
 Script completed successfully
-2026-08-11 11:44:34
+2026-08-11 11:43:40
 Sending success email...
 Trying new email relay code.
 Checking for an email attachment.
