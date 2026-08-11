@@ -932,6 +932,7 @@ try:
     merge_df4 = merge_df3.merge(df_account, how='left', left_on='Contract Name', right_on='Contract_Name__c')
     merge_df4.info()
     merge_df4 = merge_df4.drop(columns=['contract_name__c', 'Contract_Name__c_x', 'Contract_Name__c_y'])
+    merge_df4 = merge_df4.drop_duplicates()
     merge_df4.to_csv(file_path_outputs + 'brand_champion_att' + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
     
