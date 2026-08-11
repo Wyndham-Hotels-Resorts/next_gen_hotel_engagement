@@ -20,7 +20,7 @@ s3 = AWS_Utils.GetAWSClient()
 s3 = AWS_Utils.GetAWSClient()
 #file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
 file_path_sources = './SourceFiles/'
-file_path_outputs = 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/' #'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'  #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/' 
+file_path_outputs =  'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/' #''E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/''  
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
 logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName #D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/
@@ -40,6 +40,7 @@ fileName_photo = 'photo'
 fileName_account = 'FEMA Account'
 fileName_owner = 'opportunity owner'
 fileName_funding = 'funding'
+fileName_funding_date ='Funding_date'
 
 spaceID = '0f8fd184-9964-4ecb-a8a0-dad517e12dab'  # WHR Business Intelligence - Production
 
@@ -231,7 +232,7 @@ def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     contract_dict = _sf.query_all(contract_query)
     
     df_contract = pd.DataFrame(contract_dict['records']).drop(columns=['attributes'])
-    df_contract.columns = ['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c']
+    df_contract.columns = ['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 'Application_Type__c']
     
     print('df_contract info:')
     print(df_contract.info())
@@ -266,7 +267,7 @@ def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     df_contract.info()
     
-    df_contract = df_contract[['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c']]
+    df_contract = df_contract[['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 'Application_Type__c']]
     
 
     df_contract.to_csv(file_path_outputs + fileName_contract + '.csv', index=False, sep=',', header=True,
@@ -571,7 +572,33 @@ def sf_funding(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     print(funding_query)
 
-    funding_query.to_csv(file_path_outputs + 'Funding' + '.csv', index=False, sep=',', header=True,
+    funding_query.to_csv(file_path_outputs + fileName_funding + '.csv', index=False, sep=',', header=True,
+                date_format='%Y-%m-%d')
+       
+    return funding_query
+
+def sf_funding_date(_sf, _sf_queries_dir) -> pd.DataFrame:
+    
+    with open(rf'{_sf_queries_dir}funding_date_query.txt') as q:
+        funding_query = q.read()
+    
+    print(funding_query)
+    funding_dict = _sf.query_all(funding_query)
+    
+    funding_query = pd.DataFrame(funding_dict['records']).drop(columns=['attributes'])
+    funding_query.columns = ['Id',  'Funded_Amount_Date__c']
+    
+    print('funding_query info:')
+    print(funding_query.info())
+    print(f'funding_query shape: {funding_query.shape}')
+    
+    funding_query['Id'] = funding_query['Id'].astype(str)
+    
+    funding_query = funding_query[['Id', 'Funded_Amount_Date__c']]
+    
+    print(funding_query)
+
+    funding_query.to_csv(file_path_outputs + fileName_funding_date + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
        
     return funding_query
@@ -582,7 +609,7 @@ try:
     client = Birst_Utils.GetBirstClient()
     login = client.service.Login(Birst_Utils.GetBirstUser(), Birst_Utils.GetBirstPassword())
  
-    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'  #'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/qa_pip/'
+    sf_queries_dir = 'E:/Users/699052/PythonScripts/next_gen_hotel_engagement/'  #'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/'  #'E:/Users/699508/qa_pip/'
     sf = sf_connector.sf_connect()
     
     startTime = datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S')
@@ -733,18 +760,30 @@ try:
     
     sf_funding = sf_funding(sf, sf_queries_dir)
     
+    sf_funding_date = sf_funding_date(sf, sf_queries_dir)
+    
     sf_act_pln = pd.read_csv(file_path_outputs + fileName_action_plans + '.csv')
     sf_contract = pd.read_csv(file_path_outputs + fileName_contract + '.csv')
     sf_act_pln_ota = pd.read_csv(file_path_outputs + action_plans_ota  + '.csv')
     sf_owner = pd.read_csv(file_path_outputs + fileName_owner + '.csv')
     sf_funding = pd.read_csv(file_path_outputs + fileName_funding + '.csv')
+    sf_funding_date = pd.read_csv(file_path_outputs + fileName_funding_date + '.csv')
+    
+    sf_act_pln_ota = sf_act_pln_ota.rename(columns={'Verify Google is Live': 'Google Active date'}) 
     
     merged_df = sf_contract.merge(sf_funding, how='left', left_on='Contract ID', right_on='Contract Id')
     
-    merged_df = merged_df.groupby(['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c']).agg(
+    merged_df = merged_df.groupby(['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c','Application_Type__c']).agg(
     Number_of_Installments=('Id', 'count')
     ).reset_index()
     
+    sf_funding_date = sf_funding_date[['Id', 'Funded_Amount_Date__c']]
+    sf_funding = sf_funding[['Id', 'Contract Id']]
+    
+    sf_funding_merged = sf_funding.merge(sf_funding_date, how='outer', on = 'Id')
+    merged_df = merged_df.merge(sf_funding_merged, how='left', left_on='Contract ID', right_on='Contract Id')
+    merged_df.info()
+
     
     merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
     
@@ -755,7 +794,7 @@ try:
     
     merge_df2 = sf_act_pln_ota.merge(merged_df1, how='right', left_on='contract_name__c', right_on='Contract Name')
     
-    # # #################### Add PIP Completion, active waiver count #####################
+    # Don't use # #################### Add PIP Completion, active waiver count #####################
     
     # df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
     # df = df[df['PIP Type'] == 'Standard']
@@ -801,6 +840,8 @@ try:
     
     # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
     # final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
+    
+    ################################################################################################
     
     df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
     df = df[df['PIP Type'] == 'Standard']
