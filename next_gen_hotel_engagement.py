@@ -771,29 +771,73 @@ try:
     
     sf_act_pln_ota = sf_act_pln_ota.rename(columns={'Verify Google is Live': 'Google Active date'}) 
     
-    merged_df = sf_contract.merge(sf_funding, how='left', left_on='Contract ID', right_on='Contract Id')
+    # Convert date field
+    sf_funding_date["Funded_Amount_Date__c"] = pd.to_datetime(
+        sf_funding_date["Funded_Amount_Date__c"],
+        errors="coerce"
+        )
     
-    merged_df = merged_df.groupby(['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c','Application_Type__c']).agg(
-    Number_of_Installments=('Id', 'count')
-    ).reset_index()
+    # Aggregate Fund_date
+    fund_summary = (
+        sf_funding_date
+        .groupby("Id", as_index=False)
+        .agg(
+            Number_of_Installments=("Id", "size"),  # counts all rows, including blank dates
+            Funded_Amount_Date__c=("Funded_Amount_Date__c", "max")
+            )
+        )
     
-    sf_funding_date = sf_funding_date[['Id', 'Funded_Amount_Date__c']]
-
-    sf_funding = sf_funding[['Id', 'Contract Id']]
+    # Join Funding -> Contract
+    df = sf_funding.merge(
+        sf_contract,
+        left_on="Contract Id",
+        right_on="Contract ID",
+        how="left"
+        )
     
-    sf_funding_merged = sf_funding.merge(sf_funding_date, how='outer', on = 'Id')
+    # Join to Fund summary
+    df = df.merge(
+        fund_summary,
+        on="Id",
+        how="left"
+        )
+    # Collapse to one row per Contract
     
-    sf_funding_merged['Funded_Amount_Date__c'] = pd.to_datetime(sf_funding_merged['Funded_Amount_Date__c'])
+    df = (
+        df.sort_values(
+            by=["Openings_Manager",
+                "Previously_Affiliated_Brand",
+                "Distribution_Launch_Manager",
+                "Opportunity__c",
+                "Program_Participation__c",
+                "Application_Type__c"
+                ],
+            na_position="last"
+            )
+        .groupby("Contract ID", as_index=False)
+        .first()
+        )
     
-    sf_funding_merged = (sf_funding_merged[['Contract Id', 'Funded_Amount_Date__c']].groupby('Contract Id', as_index=False)['Funded_Amount_Date__c'].max()) 
-    
-    merged_df = merged_df.merge(sf_funding_merged, how='left', left_on='Contract ID', right_on='Contract Id')
-    merged_df = merged_df.drop(columns=['Contract Id'])
-    merged_df.info()
+    # Select final columns
+    merged_df = df[
+        [
+            "Contract ID",
+            "Contract Name",
+            "Number_of_Installments",
+            "Funded_Amount_Date__c",
+            "Openings_Manager",
+            "Previously_Affiliated_Brand",
+            "Distribution_Launch_Manager",
+            "Opportunity__c",
+            "Program_Participation__c",
+            "Application_Type__c"
+            ]
+        ]
+   
     # duplicate_rows = merged_df[merged_df.duplicated(subset=['Contract ID'], keep=False)]
     # # Sort by Contract Name so the duplicates are grouped together for easy viewing
     # duplicate_rows_sorted = duplicate_rows.sort_values(by='Contract ID')
-    # print(duplicate_rows_sorted)   
+    # print(duplicate_rows_sorted)  
 
     
     merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
