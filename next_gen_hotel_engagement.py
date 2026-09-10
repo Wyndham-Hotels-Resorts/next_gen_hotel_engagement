@@ -1,29 +1,20 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 27 11:26:30 2025
-
-@author: 540965
-"""
-
 import pandas as pd
+import os
 import numpy as np
 import tableauserverclient as TSC
 import datetime
 import traceback
-
 from Birst_Includes import AWS_Utils
 from Birst_Includes import Birst_Utils
-
 from Birst_Includes import sf_connector, AWS_Utils
 s3 = AWS_Utils.GetAWSClient()
 
-s3 = AWS_Utils.GetAWSClient()
-#file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
-file_path_sources = './SourceFiles/'
-file_path_outputs =  'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/' #''E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/''  
+file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
+file_path_outputs= 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'   #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'
+file_path_outputs_stipulation = 'D:/Business Intelligence/Tableau/Site_Attributes/'
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
-logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName #D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/
+logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName  #'E:/Users/699508/next_gen_hotel_engagement/'
 
 errorEmailTo = ['anshul.maathur1@wyndham.com','eric.kwok@wyndham.com', 'daniel.dai@wyndham.com','brian.mohr@wyndham.com','businessintelligence@wyndham.com']
 errorEmailSubject = 'Next Gen Hotel Engagement Data Automation - Error'
@@ -41,6 +32,7 @@ fileName_account = 'FEMA Account'
 fileName_owner = 'opportunity owner'
 fileName_funding = 'funding'
 fileName_funding_date ='Funding_date'
+fileName_stipulation = 'stipulation'
 
 spaceID = '0f8fd184-9964-4ecb-a8a0-dad517e12dab'  # WHR Business Intelligence - Production
 
@@ -105,9 +97,6 @@ def sf_he_item(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f'df_he_item shape: {df_he_item.shape}')
     
     print(df_he_item)
-    
-    # df_he_item.to_csv(file_path_outputs + 'df_he_item' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
     
     dist_col_count = df_he_item['Hotel Engagement ID'].nunique()
     print(f"Distinct count in 'col1': {dist_col_count}")
@@ -190,9 +179,6 @@ def sf_he_qa(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f'df_he_qa shape: {df_he_qa.shape}')
     
     print(df_he_qa)
-
-    # df_he_qa.to_csv(file_path_outputs + 'df_he_qa' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
        
     return df_he_qa
 
@@ -214,14 +200,11 @@ def sf_user(_sf, _sf_queries_dir) -> pd.DataFrame:
     df_user['Id'] = df_user['Id'].astype(str)
     
     df_user = df_user[['Id', 'Name']]
-    
-    # print(df_user)
 
     df_user.to_csv(file_path_outputs + fileName_user + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
        
     return df_user
-
 
 def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     
@@ -232,7 +215,10 @@ def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     contract_dict = _sf.query_all(contract_query)
     
     df_contract = pd.DataFrame(contract_dict['records']).drop(columns=['attributes'])
-    df_contract.columns = ['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 'Application_Type__c']
+    df_contract.columns = ['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 
+                           'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 
+                           'Application_Type__c', 'Chain Code', 'Oracle Site Status', 'Execution Resolved Date',
+                           'Actual Executed Date', 'Anticipated Opening Date', 'Opening Team']
     
     print('df_contract info:')
     print(df_contract.info())
@@ -240,7 +226,6 @@ def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     df_contract['Contract ID'] = df_contract['Contract ID'].astype(str)
     
-    # df_contract = pd.read_csv(file_path_outputs + fileName_contract + '.csv')
     df_user = pd.read_csv(file_path_outputs + fileName_user + '.csv')
     
     df_merged = df_contract.merge(
@@ -267,14 +252,15 @@ def sf_contract(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     df_contract.info()
     
-    df_contract = df_contract[['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 'Application_Type__c']]
+    df_contract = df_contract[['Contract ID', 'Contract Name', 'Openings_Manager', 'Previously_Affiliated_Brand', 
+                               'Distribution_Launch_Manager', 'Opportunity__c', 'Program_Participation__c', 
+                               'Application_Type__c', 'Chain Code', 'Oracle Site Status', 'Execution Resolved Date',
+                               'Actual Executed Date', 'Anticipated Opening Date', 'Opening Team']]
     
-
     df_contract.to_csv(file_path_outputs + fileName_contract + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
        
     return df_contract
-
 
 def sf_waiver(_sf, _sf_queries_dir) -> pd.DataFrame:
     
@@ -301,9 +287,6 @@ def sf_waiver(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f'df_waiver shape: {df_waiver.shape}')
     
     print(df_waiver)
-    
-    # df_waiver.to_csv(file_path_outputs + 'df_waiver' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
        
     return df_waiver
 
@@ -323,9 +306,6 @@ def sf_brand_std_desc(_sf, _sf_queries_dir) -> pd.DataFrame:
     print(f'df_brand_std_desc shape: {df_brand_std_desc.shape}')
     
     print(df_brand_std_desc)
-    
-    # df_brand_std_desc.to_csv(file_path_outputs + 'df_brand_std_desc' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
        
     return df_brand_std_desc
 
@@ -338,7 +318,6 @@ def sf_action_plans(_sf, _sf_queries_dir) -> pd.DataFrame:
     action_plans_dict = _sf.query_all(action_plans_query)
     
     df_action_plans = pd.DataFrame(action_plans_dict['records']).drop(columns=['attributes'])
-    
     
     # The 'attributes' column contains stuff like object name and the REST API endpoint accessed.
     df_action_plans.columns = ['Id',
@@ -375,8 +354,6 @@ def sf_action_plans(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     print('df_action_plans info:')
     print(df_action_plans.info())
-    # print(f'df_action_plans shape: {action_plans_query.shape}')
-    # print(df_action_plans)
     
     df_action_plans = df_action_plans[['contract__c', 'Completed_Tasks_Count__c', 'Total_Tasks_Count__c']]
     
@@ -394,7 +371,6 @@ def sf_action_plans_ota(_sf, _sf_queries_dir) -> pd.DataFrame:
     action_plans_ota_dict = _sf.query_all(action_plans_ota_query)
     
     df_action_plans_ota = pd.DataFrame(action_plans_ota_dict['records']).drop(columns=['attributes'])
-    
     
     # The 'attributes' column contains stuff like object name and the REST API endpoint accessed.
     df_action_plans_ota.columns = [
@@ -440,11 +416,9 @@ def sf_action_plans_ota(_sf, _sf_queries_dir) -> pd.DataFrame:
         'task_subcategory__c',
         'state__c',
         'whr_initiative_type__c' ]
-            
     
     print('df_action_plans_ota info:')
     print(df_action_plans_ota.info())
-    
     
     df_action_plans_ota = df_action_plans_ota[['subject', 'completion_date__c', 'contract_name__c']]
     
@@ -468,7 +442,6 @@ def sf_photo(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     df_photo = pd.DataFrame(photo_dict['records']).drop(columns=['attributes'])
     
-    
     # The 'attributes' column contains stuff like photo name and the REST API endpoint accessed.
     df_photo.columns = ['Photo_Shoot_Actual_Date__c', 'Contract_Name__c', 'Name']
     
@@ -481,7 +454,6 @@ def sf_photo(_sf, _sf_queries_dir) -> pd.DataFrame:
     df_photo.columns = ['Contract_Name__c', 'Latest_Photo_Shoot_Date']
 
     print(df_photo)
-    
     
     print('df_photo info:')
     print(df_photo.info())
@@ -506,14 +478,12 @@ def sf_account(_sf, _sf_queries_dir) -> pd.DataFrame:
     # The 'attributes' column contains stuff like account name and the REST API endpoint accessed.
     df_account.columns = ['FEMA_ID__c', 'Contract_Name__c' , 'FEMA_ID_Expiration_Date__c']
         
-        
     print('df_account info:')
     print(df_account.info())
     columns_to_check = ['FEMA_ID__c', 'Contract_Name__c', 'FEMA_ID_Expiration_Date__c']
 
     # Drop rows where ALL of the specified columns are NaN
     df_account = df_account.dropna(subset=columns_to_check, how='all')
-
         
     df_account.to_csv(file_path_outputs + fileName_account + '.csv', index=False, sep=',', header=True,
                     date_format='%Y-%m-%d')
@@ -530,7 +500,9 @@ def sf_owner(_sf, _sf_queries_dir) -> pd.DataFrame:
         
         
     # The 'attributes' column contains stuff like owner name and the REST API endpoint accessed.
-    df_owner.columns = ['OwnerId', 'Contract_Name__c', 'Opportunity Name', 'Opportunity Id']        
+    df_owner.columns = ['OwnerId', 'Contract_Name__c', 'Opportunity Name', 'Opportunity Id', 
+                        'Sub Type', 'Development Anticipated Opening Date', 'Anticipated Close Date', 
+                        'Development Opening Probability', 'Stage Probability Management Override']        
         
     print('df_owner info:')
     print(df_owner.info())
@@ -547,7 +519,6 @@ def sf_owner(_sf, _sf_queries_dir) -> pd.DataFrame:
     # Rename the newly added 'name' column to be specific
     df_merged = df_merged.rename(columns={'Name': 'Opportunity Owner'})
 
-        
     df_merged.to_csv(file_path_outputs + fileName_owner + '.csv', index=False, sep=',', header=True,
                     date_format='%Y-%m-%d')
     
@@ -586,7 +557,7 @@ def sf_funding_date(_sf, _sf_queries_dir) -> pd.DataFrame:
     funding_dict = _sf.query_all(funding_query)
     
     funding_query = pd.DataFrame(funding_dict['records']).drop(columns=['attributes'])
-    funding_query.columns = ['Id',  'Funded_Amount_Date__c']
+    funding_query.columns = ['Id',  'Funded_Amount_Date__c', 'Funded_Amount__c']
     
     print('funding_query info:')
     print(funding_query.info())
@@ -594,7 +565,7 @@ def sf_funding_date(_sf, _sf_queries_dir) -> pd.DataFrame:
     
     funding_query['Id'] = funding_query['Id'].astype(str)
     
-    funding_query = funding_query[['Id', 'Funded_Amount_Date__c']]
+    funding_query = funding_query[['Id', 'Funded_Amount_Date__c', 'Funded_Amount__c']]
     
     print(funding_query)
 
@@ -609,11 +580,10 @@ try:
     client = Birst_Utils.GetBirstClient()
     login = client.service.Login(Birst_Utils.GetBirstUser(), Birst_Utils.GetBirstPassword())
  
-    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699052/PythonScripts/next_gen_hotel_engagement/' 
+    sf_queries_dir = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' #'E:/Users/699508/next_gen_hotel_engagement/'
     sf = sf_connector.sf_connect()
     
     startTime = datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S')
-    
    
     print(datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S'))
     print('Downloading siteAttributes...')
@@ -719,8 +689,6 @@ try:
     
     sf_contract = sf_contract(sf, sf_queries_dir)
     
-    
-    
     sf_waiver = sf_waiver(sf, sf_queries_dir)
     
     sf_brand_std_desc = sf_brand_std_desc(sf, sf_queries_dir)
@@ -747,9 +715,9 @@ try:
                 date_format='%Y-%m-%d')
     
     
-    # ########################## Brand Champion Dashboard ###########################################
+    # # # ########################## Brand Champion Dashboard ###########################################
     
-    # ################Get OTA Status Go-Live Dates, AP Task Completion, Opening Manager, Previous Affiliated, Distribution Launch Manager, opportunity owner  #########
+    # # # ################Get OTA Status Go-Live Dates, AP Task Completion, Opening Manager, Previous Affiliated, Distribution Launch Manager, opportunity owner  #########
   
     
     sf_act_pln = sf_action_plans(sf, sf_queries_dir)
@@ -768,41 +736,54 @@ try:
     sf_owner = pd.read_csv(file_path_outputs + fileName_owner + '.csv')
     sf_funding = pd.read_csv(file_path_outputs + fileName_funding + '.csv')
     sf_funding_date = pd.read_csv(file_path_outputs + fileName_funding_date + '.csv')
+    sf_stipulation = pd.read_csv(file_path_outputs_stipulation + fileName_stipulation + '.csv')
     
     sf_act_pln_ota = sf_act_pln_ota.rename(columns={'Verify Google is Live': 'Google Active date'}) 
     
     # Convert date field
-    sf_funding_date["Funded_Amount_Date__c"] = pd.to_datetime(
-        sf_funding_date["Funded_Amount_Date__c"],
-        errors="coerce"
-        )
+    sf_funding_date["Funded_Amount_Date__c"] = pd.to_datetime(sf_funding_date["Funded_Amount_Date__c"],errors="coerce")
     
-    # Aggregate Fund_date
+    #Funding Expressions
+    today = pd.Timestamp.today().normalize()
     fund_summary = (
-        sf_funding_date
-        .groupby("Id", as_index=False)
-        .agg(
-            Number_of_Installments=("Id", "size"),  # counts all rows, including blank dates
-            Funded_Amount_Date__c=("Funded_Amount_Date__c", "max")
-            )
-        )
+    sf_funding_date.groupby("Id", as_index=False).agg(
+        Total_Number_of_Installments=("Id", "size"),
+        Funded_Amount_Date__c=("Funded_Amount_Date__c", "max"),
+        Total_Number_of_Installments_Prior_to_Today=("Funded_Amount_Date__c", lambda x: (x <= today).sum()),
+        Last_Funded_Amount_Date_Prior_to_Today=("Funded_Amount_Date__c", lambda x: x[x <= today].max()),
+        Last_Installment_Funded_Amount_Prior_to_Today=("Funded_Amount__c", lambda x: sf_funding_date.loc[x.index]
+                                                       .loc[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today]
+                                                       .sort_values("Funded_Amount_Date__c")["Funded_Amount__c"].iloc[-1] 
+                                                       if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today).any() else 0),
+        Total_DAN_Funded_Amount_Prior_to_Today =("Funded_Amount__c", lambda x: x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today].sum()),
+    )
+)
     
-    # Join Funding -> Contract
-    df = sf_funding.merge(
-        sf_contract,
-        left_on="Contract Id",
-        right_on="Contract ID",
-        how="left"
-        )
+    fund_summary = fund_summary [['Id', 'Funded_Amount_Date__c', 'Total_Number_of_Installments', 'Total_Number_of_Installments_Prior_to_Today', 
+                                  'Last_Funded_Amount_Date_Prior_to_Today', 'Last_Installment_Funded_Amount_Prior_to_Today', 
+                                  'Total_DAN_Funded_Amount_Prior_to_Today']]
+
+    #Pulling DAN amount from Stipulation - Rename 'DAN' and 'Contract Id' field
+    sf_stipulation = sf_stipulation.rename(columns={'Contract id': 'Contract Id'})
+    sf_stipulation = sf_stipulation.rename(columns={'DAN': 'Total_DAN_Funded_Amount'})
+    
+    #Joining Funding -> Stipulation to get DAN amount
+    fund_stip_merge = pd.merge(sf_funding, sf_stipulation, how = 'left', on = 'Contract Id')
+    fund_stip_merge = fund_stip_merge [['Contract Id', 'Id', 'Total_DAN_Funded_Amount']]
+    
+    # # Join Funding -> Contract
+    # df = sf_contract.merge(sf_funding,left_on="Contract ID",right_on="Contract Id",how="left")
+    
+    # # Join to Fund summary
+    # df = df.merge(fund_summary,on="Id",how="left")
+    
+    # Join Contract -> fund_stip_merge
+    df = sf_contract.merge(fund_stip_merge,left_on="Contract ID",right_on="Contract Id",how="left")
     
     # Join to Fund summary
-    df = df.merge(
-        fund_summary,
-        on="Id",
-        how="left"
-        )
-    # Collapse to one row per Contract
+    df = df.merge(fund_summary,on="Id",how="left")
     
+    # Collapse to one row per Contract
     df = (
         df.sort_values(
             by=["Openings_Manager",
@@ -810,7 +791,13 @@ try:
                 "Distribution_Launch_Manager",
                 "Opportunity__c",
                 "Program_Participation__c",
-                "Application_Type__c"
+                "Application_Type__c",
+                "Chain Code", 
+                "Oracle Site Status", 
+                "Execution Resolved Date",
+                "Actual Executed Date", 
+                "Anticipated Opening Date", 
+                "Opening Team"
                 ],
             na_position="last"
             )
@@ -823,23 +810,33 @@ try:
         [
             "Contract ID",
             "Contract Name",
-            "Number_of_Installments",
+            # "Number_of_Installments",
             "Funded_Amount_Date__c",
             "Openings_Manager",
             "Previously_Affiliated_Brand",
             "Distribution_Launch_Manager",
             "Opportunity__c",
             "Program_Participation__c",
-            "Application_Type__c"
+            "Application_Type__c",
+            "Chain Code", 
+            "Oracle Site Status", 
+            "Execution Resolved Date",
+            "Actual Executed Date", 
+            "Anticipated Opening Date", 
+            "Opening Team",
+            'Total_Number_of_Installments', 'Total_Number_of_Installments_Prior_to_Today', 
+            'Last_Funded_Amount_Date_Prior_to_Today', 'Last_Installment_Funded_Amount_Prior_to_Today', 
+            'Total_DAN_Funded_Amount_Prior_to_Today', 'Total_DAN_Funded_Amount'
             ]
         ]
+    
+    merged_df.to_csv(file_path_outputs + 'Contract_Fund' + '.csv' , sep = ',' , index = False, header = True)
    
     # duplicate_rows = merged_df[merged_df.duplicated(subset=['Contract ID'], keep=False)]
     # # Sort by Contract Name so the duplicates are grouped together for easy viewing
     # duplicate_rows_sorted = duplicate_rows.sort_values(by='Contract ID')
     # print(duplicate_rows_sorted)  
 
-    
     merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
     
     # merged_df.to_csv(file_path_outputs + 'owner_contract' + '.csv', index=False, sep=',', header=True,
@@ -849,58 +846,9 @@ try:
     
     merge_df2 = sf_act_pln_ota.merge(merged_df1, how='right', left_on='contract_name__c', right_on='Contract Name')
     
-    # Don't use # #################### Add PIP Completion, active waiver count #####################
-    
-    # df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
-    # df = df[df['PIP Type'] == 'Standard']
-    # df['Contract Name'].info()
-    # # 2. Pivot to get status counts per Contract and Time Frame
-    # df_pivot = df.pivot_table(
-    #     index=['Contract Name', 'Time Frame'], 
-    #     columns='Hotel Engagement Status', 
-    #     values='Status Count', 
-    #     aggfunc='sum',
-    #     fill_value=0
-    #     )
-    
-    # # 3. Ensure 'Submitted' and 'Approved' columns exist 
-    # # (This prevents errors if a certain status doesn't appear in your raw data)
-    # for col in ['Submitted', 'Approved']:
-    #     if col not in df_pivot.columns:
-    #         df_pivot[col] = 0
-            
-    # # 4. Calculate the %: (Submitted + Approved) / Total of all statuses
-    # # We sum across the row to get the denominator
-    # total_counts = df_pivot.sum(axis=1)
-    # df_pivot['Submitted %'] = ((df_pivot['Submitted'] + df_pivot['Approved']) / total_counts) 
-            
-    # # 5. Second Pivot: Move 'Time Frame' to Column headers
-    # df_rates = df_pivot[['Submitted %']].reset_index()
-    # final_df = df_rates.pivot(
-    #             index='Contract Name', 
-    #             columns='Time Frame', 
-    #             values='Submitted %'
-    #             )
-            
-    # # 6. Final Formatting
-    # # Rename columns to include "submitted %" suffix
-    # final_df.columns = [f"{col} submitted %" for col in final_df.columns]
-    # # Fill missing combinations with 0 and move Contract Number back to a column
-    # final_df = final_df.reset_index().fillna(0)
-            
-    # # Optional: Round to 2 decimal places
-    # final_df = final_df.round(2)
-
-    # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
-    
-    # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
-    # final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
-    
-    ################################################################################################
-    
     df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
     df = df[df['PIP Type'] == 'Standard']
-    df['Contract Name'].info()
+    df['Contract Name'].describe()
     
     # 2. Pivot to get status counts per Contract and Time Frame
     df_pivot = df.pivot_table(
@@ -912,13 +860,14 @@ try:
     )
     
     # 3. Ensure necessary columns exist to prevent KeyError
-    for col in ['Submitted', 'Approved']:
+    for col in ['Submitted', 'Approved', 'Closed - Not Completed', 'Closed - No Longer Needed']:
         if col not in df_pivot.columns:
             df_pivot[col] = 0
             
     # 4. Calculate raw counts for your groups
     # Total count is the sum of all statuses combined (sum across the row)
-    df_pivot['total count'] = df_pivot.sum(axis=1)
+    # df_pivot['total count'] = df_pivot.sum(axis=1)
+    df_pivot['total count'] = df_pivot.drop(columns=['Closed - Not Completed', 'Closed - No Longer Needed' ]).sum(axis=1)
     # Combined count for Submitted + Approved
     df_pivot['submitted/approved count'] = df_pivot['Submitted'] + df_pivot['Approved']
             
@@ -971,7 +920,7 @@ try:
     
     ####### Get photo date ##############
     
-    # df_photo = sf_photo(sf, sf_queries_dir)
+    df_photo = sf_photo(sf, sf_queries_dir)
     
     df_photo = pd.read_csv(file_path_outputs + fileName_photo  + '.csv')
     
@@ -979,10 +928,9 @@ try:
     
     ###### FEMA #################
     
-    # df_account = sf_account(sf, sf_queries_dir)
+    df_account = sf_account(sf, sf_queries_dir)
     
     df_account = pd.read_csv(file_path_outputs + fileName_account + '.csv')
-    
     
     merge_df4 = merge_df3.merge(df_account, how='left', left_on='Contract Name', right_on='Contract_Name__c')
     merge_df4.info()
@@ -990,8 +938,6 @@ try:
     merge_df4 = merge_df4.drop_duplicates()
     merge_df4.to_csv(file_path_outputs + 'brand_champion_att' + '.csv', index=False, sep=',', header=True,
                 date_format='%Y-%m-%d')
-    
-    
     
     print('Script completed successfully')
     print(datetime.datetime.now(tz=None).strftime('%Y-%m-%d %H:%M:%S'))
@@ -1011,11 +957,52 @@ except Exception as e:
     print(e)
     raise e    
 
+################################### DO NOT USE ###############################################################
+# Don't use # #################### Add PIP Completion, active waiver count #####################
+        
+        # df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
+        # df = df[df['PIP Type'] == 'Standard']
+        # df['Contract Name'].info()
+        # # 2. Pivot to get status counts per Contract and Time Frame
+        # df_pivot = df.pivot_table(
+        #     index=['Contract Name', 'Time Frame'], 
+        #     columns='Hotel Engagement Status', 
+        #     values='Status Count', 
+        #     aggfunc='sum',
+        #     fill_value=0
+        #     )
+        
+        # # 3. Ensure 'Submitted' and 'Approved' columns exist 
+        # # (This prevents errors if a certain status doesn't appear in your raw data)
+        # for col in ['Submitted', 'Approved']:
+        #     if col not in df_pivot.columns:
+        #         df_pivot[col] = 0
+                
+        # # 4. Calculate the %: (Submitted + Approved) / Total of all statuses
+        # # We sum across the row to get the denominator
+        # total_counts = df_pivot.sum(axis=1)
+        # df_pivot['Submitted %'] = ((df_pivot['Submitted'] + df_pivot['Approved']) / total_counts) 
+                
+        # # 5. Second Pivot: Move 'Time Frame' to Column headers
+        # df_rates = df_pivot[['Submitted %']].reset_index()
+        # final_df = df_rates.pivot(
+        #             index='Contract Name', 
+        #             columns='Time Frame', 
+        #             values='Submitted %'
+        #             )
+                
+        # # 6. Final Formatting
+        # # Rename columns to include "submitted %" suffix
+        # final_df.columns = [f"{col} submitted %" for col in final_df.columns]
+        # # Fill missing combinations with 0 and move Contract Number back to a column
+        # final_df = final_df.reset_index().fillna(0)
+                
+        # # Optional: Round to 2 decimal places
+        # final_df = final_df.round(2)
     
-    # df = pd.read_csv(file_path_outputs + 'brand_champion_att' + '.csv')
-    # duplicate_rows = df[df.duplicated(subset=['Contract Name'], keep=False)]
-    # # Sort by Contract Name so the duplicates are grouped together for easy viewing
-    # duplicate_rows_sorted = duplicate_rows.sort_values(by='Contract Name')
-    # print(duplicate_rows_sorted)    
-    # duplicate_rows_sorted.to_csv(file_path_outputs + 'duplicates' + '.csv', index=False, sep=',', header=True,
-    #             date_format='%Y-%m-%d')
+        # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+        
+        # final_df = final_df[['Contract Name', '6 Months submitted %', '12 Months submitted %', 'Within Noted Timeframe submitted %', 'PTO submitted %']]
+        # final_df.columns = [col if col == 'Contract Name' else f'PIP {col}' for col in final_df.columns]
+        
+################################### Commented ###############################################################
