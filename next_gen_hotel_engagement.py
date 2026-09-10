@@ -10,11 +10,11 @@ from Birst_Includes import sf_connector, AWS_Utils
 s3 = AWS_Utils.GetAWSClient()
 
 file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
-file_path_outputs= 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'   #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'
+file_path_outputs= 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'
 file_path_outputs_stipulation = 'D:/Business Intelligence/Tableau/Site_Attributes/'
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
-logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName  #'E:/Users/699508/next_gen_hotel_engagement/'
+logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
 
 errorEmailTo = ['anshul.maathur1@wyndham.com','eric.kwok@wyndham.com', 'daniel.dai@wyndham.com','brian.mohr@wyndham.com','businessintelligence@wyndham.com']
 errorEmailSubject = 'Next Gen Hotel Engagement Data Automation - Error'
