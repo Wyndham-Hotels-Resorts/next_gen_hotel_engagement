@@ -10,11 +10,11 @@ from Birst_Includes import sf_connector, AWS_Utils
 s3 = AWS_Utils.GetAWSClient()
 
 file_path = os.path.dirname(os.path.abspath(__file__)) + '/'
-file_path_outputs= 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'
+file_path_outputs= 'D:/Business Intelligence/Tableau/next_gen_hotel_engagement/'   #'E:/Business Intelligence/Tableau/Next_Gen_QA_Pip/'
 file_path_outputs_stipulation = 'D:/Business Intelligence/Tableau/Site_Attributes/'
 
 logFileName = 'next_gen_hotel_engagement_data_automation_output.txt'
-logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName
+logFilePath = 'D:/Business Intelligence/PythonScripts/next_gen_hotel_engagement/' + logFileName  #'E:/Users/699508/next_gen_hotel_engagement/'
 
 errorEmailTo = ['anshul.maathur1@wyndham.com','eric.kwok@wyndham.com', 'daniel.dai@wyndham.com','brian.mohr@wyndham.com','businessintelligence@wyndham.com']
 errorEmailSubject = 'Next Gen Hotel Engagement Data Automation - Error'
@@ -771,46 +771,50 @@ try:
     fund_stip_merge = pd.merge(sf_funding, sf_stipulation, how = 'left', on = 'Contract Id')
     fund_stip_merge = fund_stip_merge [['Contract Id', 'Id', 'Total_DAN_Funded_Amount']]
     
-    # # Join Funding -> Contract
-    # df = sf_contract.merge(sf_funding,left_on="Contract ID",right_on="Contract Id",how="left")
-    
-    # # Join to Fund summary
-    # df = df.merge(fund_summary,on="Id",how="left")
-    
     # Join Contract -> fund_stip_merge
     df = sf_contract.merge(fund_stip_merge,left_on="Contract ID",right_on="Contract Id",how="left")
     
     # Join to Fund summary
     df = df.merge(fund_summary,on="Id",how="left")
     
-    # Collapse to one row per Contract
-    df = (
-        df.sort_values(
-            by=["Openings_Manager",
-                "Previously_Affiliated_Brand",
-                "Distribution_Launch_Manager",
-                "Opportunity__c",
-                "Program_Participation__c",
-                "Application_Type__c",
-                "Chain Code", 
-                "Oracle Site Status", 
-                "Execution Resolved Date",
-                "Actual Executed Date", 
-                "Anticipated Opening Date", 
-                "Opening Team"
-                ],
-            na_position="last"
-            )
-        .groupby("Contract ID", as_index=False)
-        .first()
-        )
+    df["Funded_Amount_Date__c"] = pd.to_datetime(df["Funded_Amount_Date__c"])
+    df = df.sort_values(["Contract ID", "Funded_Amount_Date__c"], na_position="first")
+    
+    s = df.groupby("Contract ID")["Total_DAN_Funded_Amount_Prior_to_Today"].transform("sum").round(2) <= df["Total_DAN_Funded_Amount"]
+    
+    df.loc[s, "Total_DAN_Funded_Amount_Prior_to_Today"] = df.groupby("Contract ID")["Total_DAN_Funded_Amount_Prior_to_Today"].transform("sum")
+    df.loc[s, "Total_Number_of_Installments_Prior_to_Today"] = df.groupby("Contract ID")["Total_Number_of_Installments_Prior_to_Today"].transform("sum")
+    df.loc[s, "Total_Number_of_Installments"] = df.groupby("Contract ID")["Total_Number_of_Installments"].transform("sum")
+    
+    df = df.drop_duplicates("Contract ID", keep="last")
+    
+    # # Collapse to one row per Contract
+    # df = (
+    #     df.sort_values(
+    #         by=["Openings_Manager",
+    #             "Previously_Affiliated_Brand",
+    #             "Distribution_Launch_Manager",
+    #             "Opportunity__c",
+    #             "Program_Participation__c",
+    #             "Application_Type__c",
+    #             "Chain Code", 
+    #             "Oracle Site Status", 
+    #             "Execution Resolved Date",
+    #             "Actual Executed Date", 
+    #             "Anticipated Opening Date", 
+    #             "Opening Team"
+    #             ],
+    #         na_position="last"
+    #         )
+    #     .groupby("Contract ID", as_index=False)
+    #     .first()
+    #     )
     
     # Select final columns
     merged_df = df[
         [
             "Contract ID",
             "Contract Name",
-            # "Number_of_Installments",
             "Funded_Amount_Date__c",
             "Openings_Manager",
             "Previously_Affiliated_Brand",
@@ -831,11 +835,6 @@ try:
         ]
     
     merged_df.to_csv(file_path_outputs + 'Contract_Fund' + '.csv' , sep = ',' , index = False, header = True)
-   
-    # duplicate_rows = merged_df[merged_df.duplicated(subset=['Contract ID'], keep=False)]
-    # # Sort by Contract Name so the duplicates are grouped together for easy viewing
-    # duplicate_rows_sorted = duplicate_rows.sort_values(by='Contract ID')
-    # print(duplicate_rows_sorted)  
 
     merged_df = merged_df.merge(sf_owner, how='left', left_on='Opportunity__c', right_on='Opportunity Id')
     
@@ -915,7 +914,7 @@ try:
     f'Waiver {col}' if col != 'Contract' else col 
     for col in pivot_df.columns
     ]
-    # pivot_df.info()
+    pivot_df.info()
     merge_df2 = merge_df2.merge(pivot_df, how='left', left_on='Contract ID', right_on='Contract')
     
     ####### Get photo date ##############
