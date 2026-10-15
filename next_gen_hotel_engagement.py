@@ -846,8 +846,8 @@ try:
     merge_df2 = sf_act_pln_ota.merge(merged_df1, how='right', left_on='contract_name__c', right_on='Contract Name')
     
     df = pd.read_csv(file_path_outputs + 'Hotel Engagement' + '.csv')
-    df = df[df['PIP Type'] == 'Standard']
-    df['Contract Name'].describe()
+    # df = df[df['PIP Type'] == 'Standard']
+    # df['Contract Name'].describe()
     
     # 2. Pivot to get status counts per Contract and Time Frame
     df_pivot = df.pivot_table(
@@ -899,22 +899,38 @@ try:
     
     df = pd.read_csv(file_path_outputs + 'Waiver' + '.csv')
     
-    df = df[df['Expired'].astype(str).str.upper() == 'FALSE']
+    # df = df[df['Expired'].astype(str).str.upper() == 'FALSE']
     
-    df = df[[ 'Waiver Status', 'Contract']]
+    # df = df[[ 'Waiver Status', 'Contract']]
+    
+    # pivot_df = df.pivot_table(
+    # index='Contract', 
+    # columns='Waiver Status', 
+    # aggfunc='size',
+    # fill_value=0
+    # ).reset_index()
+    
+    # pivot_df.columns = [
+    # f'Waiver {col}' if col != 'Contract' else col 
+    # for col in pivot_df.columns
+    # ]
+    # pivot_df.info()
+    
+    df = df[['Waiver Status', 'Expired', 'Contract']]
+    df['Waiver Expired'] = (df['Expired'].astype(str).str.upper() == 'TRUE').astype(int)
     
     pivot_df = df.pivot_table(
-    index='Contract', 
-    columns='Waiver Status', 
-    aggfunc='size',
-    fill_value=0
-    ).reset_index()
+        index='Contract',
+        columns='Waiver Status',
+        aggfunc='size',
+        fill_value=0
+    )
+    pivot_df.columns = [f'Waiver {col}' for col in pivot_df.columns]
     
-    pivot_df.columns = [
-    f'Waiver {col}' if col != 'Contract' else col 
-    for col in pivot_df.columns
-    ]
+    pivot_df['Waiver Expired'] = df.groupby('Contract')['Waiver Expired'].sum()
+    pivot_df = pivot_df.reset_index()
     pivot_df.info()
+    
     merge_df2 = merge_df2.merge(pivot_df, how='left', left_on='Contract ID', right_on='Contract')
     
     ####### Get photo date ##############
