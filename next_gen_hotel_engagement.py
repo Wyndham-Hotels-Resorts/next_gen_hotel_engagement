@@ -717,19 +717,14 @@ try:
     
     # # # ########################## Brand Champion Dashboard ###########################################
     
-    # # # ################Get OTA Status Go-Live Dates, AP Task Completion, Opening Manager, Previous Affiliated, Distribution Launch Manager, opportunity owner  #########
-  
-    
+    #Run all functions for Brand Champion
     sf_act_pln = sf_action_plans(sf, sf_queries_dir)
-    
     sf_act_pln_ota = sf_action_plans_ota(sf, sf_queries_dir)
-    
     sf_owner = sf_owner(sf, sf_queries_dir)
-    
     sf_funding = sf_funding(sf, sf_queries_dir)
-    
     sf_funding_date = sf_funding_date(sf, sf_queries_dir)
     
+    # Read the files created for Brand Champion
     sf_act_pln = pd.read_csv(file_path_outputs + fileName_action_plans + '.csv')
     sf_contract = pd.read_csv(file_path_outputs + fileName_contract + '.csv')
     sf_act_pln_ota = pd.read_csv(file_path_outputs + action_plans_ota  + '.csv')
@@ -742,26 +737,42 @@ try:
     
     # Convert date field
     sf_funding_date["Funded_Amount_Date__c"] = pd.to_datetime(sf_funding_date["Funded_Amount_Date__c"],errors="coerce")
-    
     #Funding Expressions
     today = pd.Timestamp.today().normalize()
     fund_summary = (
     sf_funding_date.groupby("Id", as_index=False).agg(
         Total_Number_of_Installments=("Id", "size"),
+        # Total_Number_of_Installments=("Funded_Amount_Date__c", "count"),
         Funded_Amount_Date__c=("Funded_Amount_Date__c", "max"),
-        Total_Number_of_Installments_Prior_to_Today=("Funded_Amount_Date__c", lambda x: (x <= today).sum()),
+        # Total_Number_of_Installments_Prior_to_Today=("Funded_Amount_Date__c", lambda x: (x <= today).sum()),
+        Total_Number_of_Installments_Prior_to_Today=("Funded_Amount_Date__c", lambda x: (x <= today).sum()
+                                                if (x <= today).any()
+                                                else (1
+                                                    if (x.isna() & sf_funding_date.loc[x.index, "Funded_Amount__c"].notna()).any()
+                                                    else 0)),
         Last_Funded_Amount_Date_Prior_to_Today=("Funded_Amount_Date__c", lambda x: x[x <= today].max()),
+        # Last_Installment_Funded_Amount_Prior_to_Today=("Funded_Amount__c", lambda x: sf_funding_date.loc[x.index]
+        #                                             .loc[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today]
+        #                                             .sort_values("Funded_Amount_Date__c")["Funded_Amount__c"].iloc[-1]
+        #                                             if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today).any()
+        #                                                   else 0),
         Last_Installment_Funded_Amount_Prior_to_Today=("Funded_Amount__c", lambda x: sf_funding_date.loc[x.index]
-                                                       .loc[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today]
-                                                       .sort_values("Funded_Amount_Date__c")["Funded_Amount__c"].iloc[-1] 
-                                                       if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today).any() else 0),
-        Total_DAN_Funded_Amount_Prior_to_Today =("Funded_Amount__c", lambda x: x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today].sum()),
+                                                    .loc[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today]
+                                                    .sort_values("Funded_Amount_Date__c")["Funded_Amount__c"].iloc[-1]
+                                                    if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today).any()
+                                                    else (x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"].isna()].dropna().iloc[-1]
+                                                            if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"].isna() & x.notna()).any()
+                                                            else 0)),
+        # Total_DAN_Funded_Amount_Prior_to_Today =("Funded_Amount__c", lambda x: x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today].sum()),
+        Total_DAN_Funded_Amount_Prior_to_Today =("Funded_Amount__c", lambda x: x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today].sum()
+                                            if (sf_funding_date.loc[x.index, "Funded_Amount_Date__c"] <= today).any()
+                                            else x[sf_funding_date.loc[x.index, "Funded_Amount_Date__c"].isna()].sum()),
     )
 )
     
     fund_summary = fund_summary [['Id', 'Funded_Amount_Date__c', 'Total_Number_of_Installments', 'Total_Number_of_Installments_Prior_to_Today', 
-                                  'Last_Funded_Amount_Date_Prior_to_Today', 'Last_Installment_Funded_Amount_Prior_to_Today', 
-                                  'Total_DAN_Funded_Amount_Prior_to_Today']]
+                                    'Last_Funded_Amount_Date_Prior_to_Today', 'Last_Installment_Funded_Amount_Prior_to_Today', 
+                                    'Total_DAN_Funded_Amount_Prior_to_Today']]
 
     #Pulling DAN amount from Stipulation - Rename 'DAN' and 'Contract Id' field
     sf_stipulation = sf_stipulation.rename(columns={'Contract id': 'Contract Id'})
@@ -787,28 +798,6 @@ try:
     df.loc[s, "Total_Number_of_Installments"] = df.groupby("Contract ID")["Total_Number_of_Installments"].transform("sum")
     
     df = df.drop_duplicates("Contract ID", keep="last")
-    
-    # # Collapse to one row per Contract
-    # df = (
-    #     df.sort_values(
-    #         by=["Openings_Manager",
-    #             "Previously_Affiliated_Brand",
-    #             "Distribution_Launch_Manager",
-    #             "Opportunity__c",
-    #             "Program_Participation__c",
-    #             "Application_Type__c",
-    #             "Chain Code", 
-    #             "Oracle Site Status", 
-    #             "Execution Resolved Date",
-    #             "Actual Executed Date", 
-    #             "Anticipated Opening Date", 
-    #             "Opening Team"
-    #             ],
-    #         na_position="last"
-    #         )
-    #     .groupby("Contract ID", as_index=False)
-    #     .first()
-    #     )
     
     # Select final columns
     merged_df = df[
@@ -898,23 +887,6 @@ try:
     merge_df2 = merge_df2.merge(final_df, how='left', left_on='Contract Name', right_on='Contract Name')
     
     df = pd.read_csv(file_path_outputs + 'Waiver' + '.csv')
-    
-    # df = df[df['Expired'].astype(str).str.upper() == 'FALSE']
-    
-    # df = df[[ 'Waiver Status', 'Contract']]
-    
-    # pivot_df = df.pivot_table(
-    # index='Contract', 
-    # columns='Waiver Status', 
-    # aggfunc='size',
-    # fill_value=0
-    # ).reset_index()
-    
-    # pivot_df.columns = [
-    # f'Waiver {col}' if col != 'Contract' else col 
-    # for col in pivot_df.columns
-    # ]
-    # pivot_df.info()
     
     df = df[['Waiver Status', 'Expired', 'Contract']]
     df['Waiver Expired'] = (df['Expired'].astype(str).str.upper() == 'TRUE').astype(int)
